@@ -259,39 +259,139 @@
 
   /* ─── RESULTS / GALLERY ─── */
   #results { padding:120px 0 112px; background:var(--warm-white); }
-  .results-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:64px; }
+  .results-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:56px; }
 
   /* Photo gallery strip */
-  .gallery-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:3px; margin-bottom:72px; }
-  .gallery-item { position:relative; overflow:hidden; aspect-ratio:3/4; cursor:none; }
+  .gallery-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:3px; margin-bottom:56px; }
+  .gallery-item { position:relative; overflow:hidden; aspect-ratio:3/4; cursor:pointer; }
   .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s ease, filter 0.4s ease; filter:saturate(0.85) brightness(0.95); }
   .gallery-item:hover img { transform:scale(1.05); filter:saturate(1.0) brightness(1.0); }
-  .gallery-item-label { position:absolute; bottom:0; left:0; right:0; padding:20px 18px 16px; background:linear-gradient(to top, rgba(58,46,36,0.75) 0%, transparent 100%); opacity:0; transition:opacity 0.3s; }
+  .gallery-item-label { position:absolute; bottom:0; left:0; right:0; padding:20px 18px 16px; background:linear-gradient(to top, rgba(58,46,36,0.7) 0%, transparent 100%); opacity:0; transition:opacity 0.3s; }
   .gallery-item:hover .gallery-item-label { opacity:1; }
   .gallery-item-treatment { font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--parchment); font-weight:300; }
-  .gallery-item.tall { grid-row:span 2; aspect-ratio:auto; }
 
-  /* Before/after cards */
-  .results-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-  .result-card { border-radius:4px; overflow:hidden; border:1px solid var(--border); transition:box-shadow 0.35s, transform 0.35s; background:var(--warm-white); cursor:none; }
-  .result-card:hover { box-shadow:var(--shadow-warm); transform:translateY(-5px); }
-  .result-visual { position:relative; height:260px; overflow:hidden; }
-  .result-visual img { width:100%; height:100%; object-fit:cover; }
-  .result-visual-split { display:grid; grid-template-columns:1fr 1fr; height:100%; }
+  /* 9-card before/after grid */
+  .results-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+
+  .result-card {
+    border-radius:6px; overflow:hidden; border:1px solid var(--border);
+    transition:box-shadow 0.4s, transform 0.4s;
+    background:var(--warm-white); cursor:pointer;
+    position:relative;
+  }
+  .result-card:hover { box-shadow:0 12px 48px rgba(90,74,58,0.14); transform:translateY(-6px); }
+
+  /* Split before/after visual */
+  .result-visual { position:relative; height:280px; overflow:hidden; }
+  .result-ba-wrap { display:grid; grid-template-columns:1fr 1fr; height:100%; position:relative; }
   .result-panel { overflow:hidden; position:relative; }
-  .result-panel img { width:100%; height:100%; object-fit:cover; }
-  .result-panel-label { position:absolute; top:14px; left:14px; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,255,255,0.9); background:rgba(58,46,36,0.5); padding:4px 10px; border-radius:2px; backdrop-filter:blur(4px); }
-  .result-panel.after .result-panel-label { color:var(--parchment); background:rgba(201,122,106,0.6); }
-  .result-divider-line { position:absolute; left:50%; top:0; bottom:0; width:2px; background:rgba(254,252,248,0.6); transform:translateX(-50%); display:flex; align-items:center; justify-content:center; z-index:2; }
-  .result-divider-pill { background:var(--warm-white); border:1px solid var(--border); border-radius:20px; padding:4px 8px; font-size:9px; letter-spacing:0.1em; color:var(--fg-soft); white-space:nowrap; }
-  .result-info { padding:22px 24px; border-top:1px solid var(--border); }
-  .result-treatment { font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:400; color:var(--bark); margin-bottom:4px; }
+  .result-panel img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+  .result-panel.before img { filter:saturate(0.45) brightness(0.88) contrast(1.05); }
+  .result-panel.after img  { filter:saturate(1.1) brightness(1.03) contrast(1.02); }
+  .result-panel-label {
+    position:absolute; top:12px; left:12px;
+    font-size:9px; letter-spacing:0.28em; text-transform:uppercase;
+    color:var(--parchment); padding:4px 10px; border-radius:2px;
+    backdrop-filter:blur(6px);
+  }
+  .result-panel.before .result-panel-label { background:rgba(58,46,36,0.55); }
+  .result-panel.after  .result-panel-label { background:rgba(201,122,106,0.72); }
+
+  /* Centre divider */
+  .result-divider {
+    position:absolute; left:50%; top:0; bottom:0; width:2px;
+    background:rgba(254,252,248,0.75); transform:translateX(-50%);
+    display:flex; align-items:center; justify-content:center; z-index:3;
+  }
+  .result-divider-pill {
+    background:var(--warm-white); border:1px solid rgba(90,74,58,0.15);
+    border-radius:20px; padding:5px 10px;
+    font-size:9px; letter-spacing:0.1em; color:var(--fg-soft); white-space:nowrap;
+    box-shadow:0 2px 8px rgba(90,74,58,0.1);
+  }
+
+  /* Hover overlay — "View" */
+  .result-view-overlay {
+    position:absolute; inset:0; background:rgba(58,46,36,0.0);
+    display:flex; align-items:center; justify-content:center;
+    transition:background 0.35s; z-index:4; pointer-events:none;
+  }
+  .result-card:hover .result-view-overlay { background:rgba(58,46,36,0.18); }
+  .result-view-btn {
+    font-size:10px; letter-spacing:0.28em; text-transform:uppercase;
+    color:var(--parchment); background:rgba(90,74,58,0.75);
+    backdrop-filter:blur(8px); padding:12px 24px; border-radius:2px;
+    opacity:0; transform:translateY(8px); transition:opacity 0.3s, transform 0.3s;
+    border:1px solid rgba(254,252,248,0.2);
+  }
+  .result-card:hover .result-view-btn { opacity:1; transform:translateY(0); }
+
+  .result-info { padding:20px 24px 22px; border-top:1px solid var(--border); }
+  .result-treatment { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:400; color:var(--bark); margin-bottom:5px; }
   .result-meta { display:flex; justify-content:space-between; align-items:center; }
   .result-detail { font-size:12px; color:var(--fg-soft); font-weight:300; }
   .result-sessions { font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--rose); }
-  .skin-before { width:72px; height:72px; border-radius:50%; background:radial-gradient(circle at 40% 40%,#d4c8bc,#b8a898); box-shadow:inset 0 2px 8px rgba(0,0,0,0.08); position:relative; overflow:hidden; margin-top:20px; }
-  .skin-before::after { content:''; position:absolute; top:28px; left:12px; right:12px; height:1px; background:rgba(90,74,58,0.15); border-radius:2px; box-shadow:0 8px 0 rgba(90,74,58,0.1), 0 16px 0 rgba(90,74,58,0.07); }
-  .skin-after { width:72px; height:72px; border-radius:50%; background:radial-gradient(circle at 35% 35%,#f0ddd0,#e4c8b8); box-shadow:inset 0 2px 8px rgba(0,0,0,0.04),0 0 0 2px rgba(200,150,120,0.2); margin-top:20px; }
+
+  /* ─── LIGHTBOX ─── */
+  #lb-overlay {
+    position:fixed; inset:0; z-index:9000;
+    background:rgba(20,14,10,0.92); backdrop-filter:blur(16px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none;
+    transition:opacity 0.35s ease;
+  }
+  #lb-overlay.open { opacity:1; pointer-events:all; }
+  .lb-box {
+    position:relative; max-width:900px; width:92vw;
+    background:var(--warm-white); border-radius:8px; overflow:hidden;
+    transform:scale(0.94); transition:transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    box-shadow:0 32px 96px rgba(0,0,0,0.5);
+  }
+  #lb-overlay.open .lb-box { transform:scale(1); }
+  .lb-visual { display:grid; grid-template-columns:1fr 1fr; height:480px; }
+  .lb-panel { overflow:hidden; position:relative; }
+  .lb-panel img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+  .lb-panel.before img { filter:saturate(0.45) brightness(0.88) contrast(1.05); }
+  .lb-panel.after  img { filter:saturate(1.1) brightness(1.03) contrast(1.02); }
+  .lb-panel-label {
+    position:absolute; top:16px; left:16px;
+    font-size:9px; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--parchment); padding:5px 12px; border-radius:2px;
+  }
+  .lb-panel.before .lb-panel-label { background:rgba(58,46,36,0.6); }
+  .lb-panel.after  .lb-panel-label { background:rgba(201,122,106,0.8); }
+  .lb-divider { position:absolute; left:50%; top:0; bottom:0; width:2px; background:rgba(254,252,248,0.6); transform:translateX(-50%); z-index:2; }
+  .lb-info { padding:28px 36px 32px; display:flex; justify-content:space-between; align-items:center; }
+  .lb-treatment { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:300; color:var(--bark); }
+  .lb-meta { font-size:13px; color:var(--fg-soft); font-weight:300; margin-top:4px; }
+  .lb-right { text-align:right; }
+  .lb-sessions { font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose); margin-bottom:12px; }
+  .lb-book { display:inline-block; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--warm-white); background:var(--rose); padding:13px 28px; text-decoration:none; border-radius:2px; cursor:pointer; }
+  .lb-close {
+    position:absolute; top:16px; right:16px; z-index:10;
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(58,46,36,0.6); border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--parchment); backdrop-filter:blur(4px);
+    transition:background 0.2s;
+  }
+  .lb-close:hover { background:rgba(58,46,36,0.9); }
+  .lb-nav {
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:44px; height:44px; border-radius:50%; border:1px solid rgba(254,252,248,0.3);
+    background:rgba(58,46,36,0.5); cursor:pointer; z-index:10;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--parchment); backdrop-filter:blur(4px);
+    transition:background 0.2s, border-color 0.2s;
+  }
+  .lb-nav:hover { background:rgba(58,46,36,0.9); border-color:rgba(254,252,248,0.6); }
+  .lb-prev { left:16px; }
+  .lb-next { right:16px; }
+  .lb-counter { position:absolute; bottom:16px; left:50%; transform:translateX(-50%); font-size:11px; letter-spacing:0.2em; color:rgba(254,252,248,0.5); }
+
+  /* legacy — keep for compat */
+  .skin-before { display:none; }
+  .skin-after  { display:none; }
 
   /* ─── TESTIMONIALS ─── */
   #testimonials { padding:112px 0; background:var(--bark); }
@@ -458,8 +558,8 @@
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#specials">Specials</a></li>
-    <li><a href="#results">Results</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#results">Results</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 
@@ -682,7 +782,7 @@
     <div class="about-inner">
       <div class="about-visual reveal from-left">
         <div class="about-portrait">
-          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&q=85&fit=crop&crop=faces,top" alt="Medical aesthetics provider" style="width:100%;height:100%;object-fit:cover;object-position:center top;" loading="lazy"/>
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=85&fit=crop&crop=faces,top" alt="Medical aesthetics provider" style="width:100%;height:100%;object-fit:cover;object-position:center top;" loading="lazy"/>
         </div>
         <div class="about-cert">
           <div class="about-cert-icon">✦</div>
@@ -733,7 +833,7 @@
         <div class="gallery-item-label"><div class="gallery-item-treatment">Dermal Filler</div></div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&q=80&fit=crop&crop=center" alt="Med spa treatment" loading="lazy"/>
+        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=400&q=80&fit=crop&crop=faces,top" alt="PRP therapy treatment" loading="lazy"/>
         <div class="gallery-item-label"><div class="gallery-item-treatment">PRP Therapy</div></div>
       </div>
       <div class="gallery-item">
@@ -742,70 +842,247 @@
       </div>
     </div>
 
-    <!-- BEFORE / AFTER CARDS -->
-    <div class="results-grid">
-      <div class="result-card reveal from-bottom">
+    <!-- BEFORE / AFTER CARDS — 9 cards, same person each pair via CSS filter split -->
+    <div class="results-grid" id="resultsGrid">
+
+      <!-- CARD 1 — Botox, Forehead Lines -->
+      <div class="result-card reveal from-bottom" data-index="0" onclick="openLightbox(0)">
         <div class="result-visual">
-          <div class="result-visual-split">
+          <div class="result-ba-wrap">
             <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=300&q=75&fit=crop&crop=faces" alt="Before treatment" loading="lazy" style="filter:saturate(0.7) brightness(0.9);"/>
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=85&fit=crop&crop=faces,top" alt="Before Botox" loading="lazy"/>
               <span class="result-panel-label">Before</span>
             </div>
             <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&q=75&fit=crop&crop=faces" alt="After treatment" loading="lazy" style="filter:saturate(1.0) brightness(1.02);"/>
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=85&fit=crop&crop=faces,top" alt="After Botox" loading="lazy"/>
               <span class="result-panel-label">After</span>
             </div>
           </div>
-          <div class="result-divider-line"><div class="result-divider-pill">before · after</div></div>
+          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
+          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
         </div>
         <div class="result-info">
-          <div class="result-treatment serif">Full Face Rejuvenation</div>
+          <div class="result-treatment">Botox — Forehead & 11s</div>
+          <div class="result-meta"><span class="result-detail">Dysport · 42 units</span><span class="result-sessions">1 visit</span></div>
+        </div>
+      </div>
+
+      <!-- CARD 2 — Lip Filler -->
+      <div class="result-card reveal from-bottom reveal-delay-1" data-index="1" onclick="openLightbox(1)">
+        <div class="result-visual">
+          <div class="result-ba-wrap">
+            <div class="result-panel before">
+              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=85&fit=crop&crop=faces,top" alt="Before lip filler" loading="lazy"/>
+              <span class="result-panel-label">Before</span>
+            </div>
+            <div class="result-panel after">
+              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=85&fit=crop&crop=faces,top" alt="After lip filler" loading="lazy"/>
+              <span class="result-panel-label">After</span>
+            </div>
+          </div>
+          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
+          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
+        </div>
+        <div class="result-info">
+          <div class="result-treatment">Lip Enhancement</div>
+          <div class="result-meta"><span class="result-detail">Juvederm Ultra Plus · 1ml</span><span class="result-sessions">1 visit</span></div>
+        </div>
+      </div>
+
+      <!-- CARD 3 — Cheek Filler -->
+      <div class="result-card reveal from-bottom reveal-delay-2" data-index="2" onclick="openLightbox(2)">
+        <div class="result-visual">
+          <div class="result-ba-wrap">
+            <div class="result-panel before">
+              <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=85&fit=crop&crop=faces,top" alt="Before cheek filler" loading="lazy"/>
+              <span class="result-panel-label">Before</span>
+            </div>
+            <div class="result-panel after">
+              <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=85&fit=crop&crop=faces,top" alt="After cheek filler" loading="lazy"/>
+              <span class="result-panel-label">After</span>
+            </div>
+          </div>
+          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
+          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
+        </div>
+        <div class="result-info">
+          <div class="result-treatment">Cheek Contouring</div>
+          <div class="result-meta"><span class="result-detail">Voluma · 2ml bilateral</span><span class="result-sessions">1 visit</span></div>
+        </div>
+      </div>
+
+      <!-- CARD 4 — Microneedling -->
+      <div class="result-card reveal from-bottom" data-index="3" onclick="openLightbox(3)">
+        <div class="result-visual">
+          <div class="result-ba-wrap">
+            <div class="result-panel before">
+              <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=85&fit=crop&crop=faces,top" alt="Before microneedling" loading="lazy"/>
+              <span class="result-panel-label">Before</span>
+            </div>
+            <div class="result-panel after">
+              <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=85&fit=crop&crop=faces,top" alt="After microneedling" loading="lazy"/>
+              <span class="result-panel-label">After</span>
+            </div>
+          </div>
+          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
+          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
+        </div>
+        <div class="result-info">
+          <div class="result-treatment">Microneedling Series</div>
+          <div class="result-meta"><span class="result-detail">SkinPen · Series of 3</span><span class="result-sessions">3 visits</span></div>
+        </div>
+      </div>
+
+      <!-- CARD 5 — PRP -->
+      <div class="result-card reveal from-bottom reveal-delay-1" data-index="4" onclick="openLightbox(4)">
+        <div class="result-visual">
+          <div class="result-ba-wrap">
+            <div class="result-panel before">
+              <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&q=85&fit=crop&crop=faces,top" alt="Before PRP" loading="lazy"/>
+              <span class="result-panel-label">Before</span>
+            </div>
+            <div class="result-panel after">
+              <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&q=85&fit=crop&crop=faces,top" alt="After PRP" loading="lazy"/>
+              <span class="result-panel-label">After</span>
+            </div>
+          </div>
+          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
+          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
+        </div>
+        <div class="result-info">
+          <div class="result-treatment">PRP Skin Revival</div>
+          <div class="result-meta"><span class="result-detail">Platelet-Rich Plasma · 4 sessions</span><span class="result-sessions">4 visits</span></div>
+        </div>
+      </div>
+
+      <!-- CARD 6 — Chemical Peel -->
+      <div class="result-card reveal from-bottom reveal-delay-2" data-index="5" onclick="openLightbox(5)">
+        <div class="result-visual">
+          <div class="result-ba-wrap">
+            <div class="result-panel before">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=85&fit=crop&crop=faces,top" alt="Before chemical peel" loading="lazy"/>
+              <span class="result-panel-label">Before</span>
+            </div>
+            <div class="result-panel after">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=85&fit=crop&crop=faces,top" alt="After chemical peel" loading="lazy"/>
+              <span class="result-panel-label">After</span>
+            </div>
+          </div>
+          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
+          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
+        </div>
+        <div class="result-info">
+          <div class="result-treatment">Chemical Peel</div>
+          <div class="result-meta"><span class="result-detail">VI Peel · Precision Plus</span><span class="result-sessions">2 visits</span></div>
+        </div>
+      </div>
+
+      <!-- CARD 7 — Full Face Rejuvenation -->
+      <div class="result-card reveal from-bottom" data-index="6" onclick="openLightbox(6)">
+        <div class="result-visual">
+          <div class="result-ba-wrap">
+            <div class="result-panel before">
+              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400&q=85&fit=crop&crop=faces,top" alt="Before full face" loading="lazy"/>
+              <span class="result-panel-label">Before</span>
+            </div>
+            <div class="result-panel after">
+              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400&q=85&fit=crop&crop=faces,top" alt="After full face" loading="lazy"/>
+              <span class="result-panel-label">After</span>
+            </div>
+          </div>
+          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
+          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
+        </div>
+        <div class="result-info">
+          <div class="result-treatment">Full Face Rejuvenation</div>
           <div class="result-meta"><span class="result-detail">Botox + Filler + Microneedling</span><span class="result-sessions">3 visits</span></div>
         </div>
       </div>
 
-      <div class="result-card reveal from-bottom reveal-delay-1">
+      <!-- CARD 8 — Skin Texture -->
+      <div class="result-card reveal from-bottom reveal-delay-1" data-index="7" onclick="openLightbox(7)">
         <div class="result-visual">
-          <div class="result-visual-split">
+          <div class="result-ba-wrap">
             <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=300&q=75&fit=crop&crop=faces" alt="Before lip filler" loading="lazy" style="filter:saturate(0.7) brightness(0.88);"/>
+              <img src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=400&q=85&fit=crop&crop=faces,top" alt="Before skin texture" loading="lazy"/>
               <span class="result-panel-label">Before</span>
             </div>
             <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=300&q=75&fit=crop&crop=faces" alt="After lip filler" loading="lazy" style="filter:saturate(1.05) brightness(1.0);"/>
+              <img src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=400&q=85&fit=crop&crop=faces,top" alt="After skin texture" loading="lazy"/>
               <span class="result-panel-label">After</span>
             </div>
           </div>
-          <div class="result-divider-line"><div class="result-divider-pill">before · after</div></div>
+          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
+          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
         </div>
         <div class="result-info">
-          <div class="result-treatment serif">Lip Enhancement</div>
-          <div class="result-meta"><span class="result-detail">Juvederm Ultra Plus</span><span class="result-sessions">1 visit</span></div>
+          <div class="result-treatment">Skin Texture & Tone</div>
+          <div class="result-meta"><span class="result-detail">Microneedling + PRP + Peel</span><span class="result-sessions">4 visits</span></div>
         </div>
       </div>
 
-      <div class="result-card reveal from-bottom reveal-delay-2">
+      <!-- CARD 9 — Under-Eye / Tear Trough -->
+      <div class="result-card reveal from-bottom reveal-delay-2" data-index="8" onclick="openLightbox(8)">
         <div class="result-visual">
-          <div class="result-visual-split">
+          <div class="result-ba-wrap">
             <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=75&fit=crop&crop=faces" alt="Before skin treatment" loading="lazy" style="filter:saturate(0.65) brightness(0.85);"/>
+              <img src="https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=400&q=85&fit=crop&crop=faces,top" alt="Before under-eye" loading="lazy"/>
               <span class="result-panel-label">Before</span>
             </div>
             <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=75&fit=crop&crop=faces" alt="After skin treatment" loading="lazy" style="filter:saturate(1.0) brightness(1.03);"/>
+              <img src="https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=400&q=85&fit=crop&crop=faces,top" alt="After under-eye" loading="lazy"/>
               <span class="result-panel-label">After</span>
             </div>
           </div>
-          <div class="result-divider-line"><div class="result-divider-pill">before · after</div></div>
+          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
+          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
         </div>
         <div class="result-info">
-          <div class="result-treatment serif">Skin Texture</div>
-          <div class="result-meta"><span class="result-detail">Microneedling + PRP</span><span class="result-sessions">4 visits</span></div>
+          <div class="result-treatment">Under-Eye Restoration</div>
+          <div class="result-meta"><span class="result-detail">Restylane · Tear Trough</span><span class="result-sessions">1 visit</span></div>
         </div>
+      </div>
+
+    </div><!-- /results-grid -->
+  </div>
+</section>
+
+<!-- ─── LIGHTBOX ─── -->
+<div id="lb-overlay" role="dialog" aria-modal="true" aria-label="Before and after results viewer">
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous result">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next result">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <div class="lb-box" id="lbBox">
+    <button class="lb-close" id="lbClose" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="lb-visual" id="lbVisual">
+      <div class="lb-panel before" id="lbBefore">
+        <img id="lbBeforeImg" src="" alt="Before"/>
+        <span class="lb-panel-label">Before</span>
+      </div>
+      <div class="lb-divider"></div>
+      <div class="lb-panel after" id="lbAfter">
+        <img id="lbAfterImg" src="" alt="After"/>
+        <span class="lb-panel-label">After</span>
+      </div>
+    </div>
+    <div class="lb-info">
+      <div>
+        <div class="lb-treatment" id="lbTreatment"></div>
+        <div class="lb-meta" id="lbMeta"></div>
+      </div>
+      <div class="lb-right">
+        <div class="lb-sessions" id="lbSessions"></div>
+        <a class="lb-book" href="#contact" onclick="closeLightbox()">Book This Treatment</a>
       </div>
     </div>
   </div>
-</section>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
 
 <!-- ─── TESTIMONIALS ─── -->
 <section id="testimonials">
@@ -1141,6 +1418,130 @@ document.querySelectorAll('.service-card').forEach(card => {
   }, { passive:true });
 
   goTo(0);
+})();
+
+// ── Before/After Lightbox ──
+(function() {
+  const RESULTS = [
+    {
+      img:       'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=900&q=90&fit=crop&crop=faces,top',
+      treatment: 'Botox — Forehead & 11s',
+      meta:      'Dysport · 42 units · Natural brow lift, full relaxation of glabellar lines',
+      sessions:  '1 Visit'
+    },
+    {
+      img:       'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=900&q=90&fit=crop&crop=faces,top',
+      treatment: 'Lip Enhancement',
+      meta:      'Juvederm Ultra Plus · 1ml · Definition, symmetry, subtle volume',
+      sessions:  '1 Visit'
+    },
+    {
+      img:       'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=900&q=90&fit=crop&crop=faces,top',
+      treatment: 'Cheek Contouring',
+      meta:      'Voluma · 2ml bilateral · Lifted midface, refined cheekbone definition',
+      sessions:  '1 Visit'
+    },
+    {
+      img:       'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&q=90&fit=crop&crop=faces,top',
+      treatment: 'Microneedling Series',
+      meta:      'SkinPen · Series of 3 · Pore refinement, texture improvement, radiance',
+      sessions:  '3 Visits'
+    },
+    {
+      img:       'https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=900&q=90&fit=crop&crop=faces,top',
+      treatment: 'PRP Skin Revival',
+      meta:      'Platelet-Rich Plasma · 4 sessions · Collagen induction, glow restoration',
+      sessions:  '4 Visits'
+    },
+    {
+      img:       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&q=90&fit=crop&crop=faces,top',
+      treatment: 'Chemical Peel',
+      meta:      'VI Peel Precision Plus · Hyperpigmentation, fine lines, evenness',
+      sessions:  '2 Visits'
+    },
+    {
+      img:       'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=900&q=90&fit=crop&crop=faces,top',
+      treatment: 'Full Face Rejuvenation',
+      meta:      'Botox + Filler + Microneedling · Comprehensive age reversal protocol',
+      sessions:  '3 Visits'
+    },
+    {
+      img:       'https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=900&q=90&fit=crop&crop=faces,top',
+      treatment: 'Skin Texture & Tone',
+      meta:      'Microneedling + PRP + VI Peel · Multi-modality skin transformation',
+      sessions:  '4 Visits'
+    },
+    {
+      img:       'https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=900&q=90&fit=crop&crop=faces,top',
+      treatment: 'Under-Eye Restoration',
+      meta:      'Restylane · Tear Trough · Hollow correction, dark shadow elimination',
+      sessions:  '1 Visit'
+    }
+  ];
+
+  const overlay    = document.getElementById('lb-overlay');
+  const prevBtn    = document.getElementById('lbPrev');
+  const nextBtn    = document.getElementById('lbNext');
+  const closeBtn   = document.getElementById('lbClose');
+  const beforeImg  = document.getElementById('lbBeforeImg');
+  const afterImg   = document.getElementById('lbAfterImg');
+  const treatment  = document.getElementById('lbTreatment');
+  const meta       = document.getElementById('lbMeta');
+  const sessions   = document.getElementById('lbSessions');
+  const counter    = document.getElementById('lbCounter');
+  let current      = 0;
+
+  function populate(idx) {
+    const r = RESULTS[idx];
+    beforeImg.src    = r.img;
+    afterImg.src     = r.img;
+    treatment.textContent = r.treatment;
+    meta.textContent      = r.meta;
+    sessions.textContent  = r.sessions;
+    counter.textContent   = `${idx + 1} of ${RESULTS.length}`;
+    prevBtn.style.opacity = idx === 0                    ? '0.3' : '1';
+    nextBtn.style.opacity = idx === RESULTS.length - 1  ? '0.3' : '1';
+    prevBtn.disabled      = idx === 0;
+    nextBtn.disabled      = idx === RESULTS.length - 1;
+  }
+
+  window.openLightbox = function(idx) {
+    current = idx;
+    populate(current);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeLightbox = function() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  prevBtn.addEventListener('click', () => {
+    if (current > 0) { current--; populate(current); }
+  });
+  nextBtn.addEventListener('click', () => {
+    if (current < RESULTS.length - 1) { current++; populate(current); }
+  });
+  closeBtn.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape')      closeLightbox();
+    if (e.key === 'ArrowLeft'  && current > 0)                    { current--; populate(current); }
+    if (e.key === 'ArrowRight' && current < RESULTS.length - 1)   { current++; populate(current); }
+  });
+
+  // Swipe in lightbox
+  let lbStartX = 0;
+  overlay.addEventListener('touchstart', e => { lbStartX = e.touches[0].clientX; }, { passive:true });
+  overlay.addEventListener('touchend', e => {
+    const diff = lbStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && current < RESULTS.length - 1) { current++; populate(current); }
+      if (diff < 0 && current > 0)                  { current--; populate(current); }
+    }
+  }, { passive:true });
 })();
 </script>
 </body>
