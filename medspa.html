@@ -393,6 +393,55 @@
   .skin-before { display:none; }
   .skin-after  { display:none; }
 
+  /* ─── ALL SERVICES EXPANDED ─── */
+  #all-services { padding:112px 0; background:var(--cream); border-top:1px solid var(--border); }
+  .all-services-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:60px; }
+  .all-services-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .svc-pill {
+    background:var(--warm-white); border:1px solid var(--border); border-radius:4px;
+    padding:28px 24px; transition:border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    cursor:none; position:relative; overflow:hidden;
+  }
+  .svc-pill::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(to right,var(--blush),var(--gold-light)); transform:scaleX(0); transform-origin:left; transition:transform 0.35s; }
+  .svc-pill:hover { border-color:var(--border-warm); box-shadow:var(--shadow-card); transform:translateY(-3px); }
+  .svc-pill:hover::after { transform:scaleX(1); }
+  .svc-pill-icon { font-size:22px; margin-bottom:14px; }
+  .svc-pill-name { font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:400; color:var(--bark); margin-bottom:6px; }
+  .svc-pill-desc { font-size:12px; color:var(--fg-soft); font-weight:300; line-height:1.6; margin-bottom:14px; }
+  .svc-pill-price { font-size:11px; letter-spacing:0.1em; color:var(--rose); font-weight:400; }
+  .svc-pill-link { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose); text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:gap 0.2s; cursor:none; margin-top:12px; }
+  .svc-pill-link:hover { gap:10px; }
+  .svc-pill-link::after { content:'→'; }
+  .svc-category-label { font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bark-soft); margin-bottom:20px; margin-top:40px; padding-bottom:10px; border-bottom:1px solid var(--border); grid-column:1/-1; }
+  .svc-category-label:first-child { margin-top:0; }
+
+  /* ─── TEAM ─── */
+  #team { padding:112px 0; background:var(--warm-white); border-top:1px solid var(--border); }
+  .team-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:60px; }
+  .team-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+  .team-card {
+    border-radius:6px; overflow:hidden; border:1px solid var(--border);
+    background:var(--warm-white); transition:box-shadow 0.35s, transform 0.35s;
+    cursor:none;
+  }
+  .team-card:hover { box-shadow:var(--shadow-card); transform:translateY(-4px); }
+  .team-photo { aspect-ratio:3/4; overflow:hidden; position:relative; background:linear-gradient(160deg,var(--blush-pale),var(--gold-pale)); }
+  .team-photo img { width:100%; height:100%; object-fit:cover; object-position:center top; transition:transform 0.5s ease; filter:saturate(0.9) brightness(0.98); }
+  .team-card:hover .team-photo img { transform:scale(1.04); }
+  .team-specialty-badge { position:absolute; bottom:14px; left:14px; background:rgba(254,252,248,0.92); backdrop-filter:blur(8px); font-size:9px; letter-spacing:0.22em; text-transform:uppercase; color:var(--rose); padding:5px 12px; border-radius:2px; border:1px solid rgba(201,122,106,0.2); }
+  .team-info { padding:20px 22px 24px; }
+  .team-name { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:400; color:var(--bark); margin-bottom:3px; }
+  .team-title { font-size:11px; color:var(--fg-soft); font-weight:300; letter-spacing:0.05em; margin-bottom:12px; }
+  .team-bio { font-size:12px; color:var(--fg-mid); font-weight:300; line-height:1.7; margin-bottom:16px; }
+  .team-actions { display:flex; gap:10px; flex-wrap:wrap; }
+  .team-book-btn { font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--warm-white); background:var(--rose); padding:9px 18px; text-decoration:none; border-radius:2px; cursor:none; transition:background 0.2s; }
+  .team-book-btn:hover { background:var(--rose-deep); }
+  .team-email-btn { font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--bark-mid); border:1px solid var(--border); padding:9px 16px; text-decoration:none; border-radius:2px; cursor:none; transition:border-color 0.2s, color 0.2s; }
+  .team-email-btn:hover { border-color:var(--rose); color:var(--rose); }
+  .team-lead { grid-column:span 2; }
+  .team-lead .team-photo { aspect-ratio:16/9; }
+  .team-lead .team-name { font-size:24px; }
+
   /* ─── TESTIMONIALS ─── */
   #testimonials { padding:112px 0; background:var(--bark); }
   #testimonials .section-eyebrow { color:var(--blush); }
@@ -560,6 +609,7 @@
     <li><a href="#specials">Specials</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#results">Results</a></li>
+    <li><a href="#team">Team</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 
@@ -707,6 +757,11 @@
         <a class="service-cta" href="#contact" style="color:var(--sage);">Book Today</a>
       </div>
     </div>
+    <div style="text-align:center;margin-top:52px;" class="reveal from-bottom">
+      <a class="btn-text" href="#all-services" style="color:var(--bark-mid);font-size:12px;">
+        View All 16 Services <span class="btn-text-arrow"></span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -803,7 +858,10 @@
           <div class="credential"><span class="credential-dot"></span>Trained at UC San Francisco Medical Center</div>
           <div class="credential"><span class="credential-dot"></span><span class="count-up" data-target="2400" data-suffix="+">0</span> procedures performed</div>
         </div>
-        <a class="btn-rose" href="#contact">Book Your Consult</a>
+        <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+          <a class="btn-rose" href="#contact">Book Your Consult</a>
+          <a class="btn-text" href="#team" style="color:var(--bark-mid);">Meet the Full Team <span class="btn-text-arrow"></span></a>
+        </div>
       </div>
     </div>
   </div>
@@ -822,39 +880,39 @@
       </a>
     </div>
 
-    <!-- PHOTO GALLERY STRIP -->
+    <!-- PHOTO GALLERY STRIP — real treatment/clinical images -->
     <div class="gallery-strip reveal from-bottom">
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400&q=80&fit=crop&crop=faces,top" alt="Skin treatment result" loading="lazy"/>
-        <div class="gallery-item-label"><div class="gallery-item-treatment">Skin Rejuvenation</div></div>
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=500&q=85&fit=crop&crop=faces,top" alt="Facial treatment in progress" loading="lazy"/>
+        <div class="gallery-item-label"><div class="gallery-item-treatment">Neurotoxin Treatment</div></div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=80&fit=crop&crop=faces,center" alt="Facial treatment" loading="lazy"/>
-        <div class="gallery-item-label"><div class="gallery-item-treatment">Dermal Filler</div></div>
+        <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=500&q=85&fit=crop&crop=faces,top" alt="Lip filler injection" loading="lazy"/>
+        <div class="gallery-item-label"><div class="gallery-item-treatment">Lip Filler</div></div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=400&q=80&fit=crop&crop=faces,top" alt="PRP therapy treatment" loading="lazy"/>
-        <div class="gallery-item-label"><div class="gallery-item-treatment">PRP Therapy</div></div>
+        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=500&q=85&fit=crop&crop=faces,top" alt="Microneedling treatment" loading="lazy"/>
+        <div class="gallery-item-label"><div class="gallery-item-treatment">Microneedling</div></div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&q=80&fit=crop&crop=faces,top" alt="Beauty treatment" loading="lazy"/>
-        <div class="gallery-item-label"><div class="gallery-item-treatment">Botox Treatment</div></div>
+        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&q=85&fit=crop&crop=faces,top" alt="Skin consultation" loading="lazy"/>
+        <div class="gallery-item-label"><div class="gallery-item-treatment">Skin Consultation</div></div>
       </div>
     </div>
 
     <!-- BEFORE / AFTER CARDS — 9 cards, same person each pair via CSS filter split -->
     <div class="results-grid" id="resultsGrid">
 
-      <!-- CARD 1 — Botox, Forehead Lines -->
+      <!-- CARD 1 — Botox -->
       <div class="result-card reveal from-bottom" data-index="0" onclick="openLightbox(0)">
         <div class="result-visual">
           <div class="result-ba-wrap">
             <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=85&fit=crop&crop=faces,top" alt="Before Botox" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=85&fit=crop&crop=faces,top" alt="Before Botox" loading="lazy"/>
               <span class="result-panel-label">Before</span>
             </div>
             <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=85&fit=crop&crop=faces,top" alt="After Botox" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=85&fit=crop&crop=faces,top" alt="After Botox" loading="lazy"/>
               <span class="result-panel-label">After</span>
             </div>
           </div>
@@ -872,11 +930,11 @@
         <div class="result-visual">
           <div class="result-ba-wrap">
             <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=85&fit=crop&crop=faces,top" alt="Before lip filler" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=85&fit=crop&crop=faces,top" alt="Before lip filler" loading="lazy"/>
               <span class="result-panel-label">Before</span>
             </div>
             <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=85&fit=crop&crop=faces,top" alt="After lip filler" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=85&fit=crop&crop=faces,top" alt="After lip filler" loading="lazy"/>
               <span class="result-panel-label">After</span>
             </div>
           </div>
@@ -894,11 +952,11 @@
         <div class="result-visual">
           <div class="result-ba-wrap">
             <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=85&fit=crop&crop=faces,top" alt="Before cheek filler" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=85&fit=crop&crop=faces,top" alt="Before cheek filler" loading="lazy"/>
               <span class="result-panel-label">Before</span>
             </div>
             <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=85&fit=crop&crop=faces,top" alt="After cheek filler" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=85&fit=crop&crop=faces,top" alt="After cheek filler" loading="lazy"/>
               <span class="result-panel-label">After</span>
             </div>
           </div>
@@ -916,11 +974,11 @@
         <div class="result-visual">
           <div class="result-ba-wrap">
             <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=85&fit=crop&crop=faces,top" alt="Before microneedling" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=85&fit=crop&crop=faces,top" alt="Before microneedling" loading="lazy"/>
               <span class="result-panel-label">Before</span>
             </div>
             <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=85&fit=crop&crop=faces,top" alt="After microneedling" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=85&fit=crop&crop=faces,top" alt="After microneedling" loading="lazy"/>
               <span class="result-panel-label">After</span>
             </div>
           </div>
@@ -938,11 +996,11 @@
         <div class="result-visual">
           <div class="result-ba-wrap">
             <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&q=85&fit=crop&crop=faces,top" alt="Before PRP" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=400&q=85&fit=crop&crop=faces,top" alt="Before PRP" loading="lazy"/>
               <span class="result-panel-label">Before</span>
             </div>
             <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&q=85&fit=crop&crop=faces,top" alt="After PRP" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=400&q=85&fit=crop&crop=faces,top" alt="After PRP" loading="lazy"/>
               <span class="result-panel-label">After</span>
             </div>
           </div>
@@ -960,11 +1018,11 @@
         <div class="result-visual">
           <div class="result-ba-wrap">
             <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=85&fit=crop&crop=faces,top" alt="Before chemical peel" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=400&q=85&fit=crop&crop=faces,top" alt="Before chemical peel" loading="lazy"/>
               <span class="result-panel-label">Before</span>
             </div>
             <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=85&fit=crop&crop=faces,top" alt="After chemical peel" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=400&q=85&fit=crop&crop=faces,top" alt="After chemical peel" loading="lazy"/>
               <span class="result-panel-label">After</span>
             </div>
           </div>
@@ -982,11 +1040,11 @@
         <div class="result-visual">
           <div class="result-ba-wrap">
             <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400&q=85&fit=crop&crop=faces,top" alt="Before full face" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&q=85&fit=crop&crop=faces,top" alt="Before full face" loading="lazy"/>
               <span class="result-panel-label">Before</span>
             </div>
             <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400&q=85&fit=crop&crop=faces,top" alt="After full face" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&q=85&fit=crop&crop=faces,top" alt="After full face" loading="lazy"/>
               <span class="result-panel-label">After</span>
             </div>
           </div>
@@ -1004,11 +1062,11 @@
         <div class="result-visual">
           <div class="result-ba-wrap">
             <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=400&q=85&fit=crop&crop=faces,top" alt="Before skin texture" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400&q=85&fit=crop&crop=faces,top" alt="Before skin texture" loading="lazy"/>
               <span class="result-panel-label">Before</span>
             </div>
             <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=400&q=85&fit=crop&crop=faces,top" alt="After skin texture" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400&q=85&fit=crop&crop=faces,top" alt="After skin texture" loading="lazy"/>
               <span class="result-panel-label">After</span>
             </div>
           </div>
@@ -1021,16 +1079,16 @@
         </div>
       </div>
 
-      <!-- CARD 9 — Under-Eye / Tear Trough -->
+      <!-- CARD 9 — Under-Eye -->
       <div class="result-card reveal from-bottom reveal-delay-2" data-index="8" onclick="openLightbox(8)">
         <div class="result-visual">
           <div class="result-ba-wrap">
             <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=400&q=85&fit=crop&crop=faces,top" alt="Before under-eye" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=85&fit=crop&crop=faces,top" alt="Before under-eye" loading="lazy"/>
               <span class="result-panel-label">Before</span>
             </div>
             <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=400&q=85&fit=crop&crop=faces,top" alt="After under-eye" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=85&fit=crop&crop=faces,top" alt="After under-eye" loading="lazy"/>
               <span class="result-panel-label">After</span>
             </div>
           </div>
@@ -1203,6 +1261,237 @@
 
         </div><!-- /testi-track -->
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ALL SERVICES ─── -->
+<section id="all-services">
+  <div class="section-wrap">
+    <div class="all-services-header reveal from-bottom">
+      <div>
+        <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Full Menu</div>
+        <h2 class="section-title">Every treatment,<br><em>all in one place.</em></h2>
+      </div>
+      <a class="btn-text reveal from-right" href="#contact" style="color:var(--bark-mid);flex-shrink:0;align-self:flex-end;">
+        Book a Consult <span class="btn-text-arrow"></span>
+      </a>
+    </div>
+
+    <div class="all-services-grid">
+      <!-- INJECTABLES -->
+      <div class="svc-category-label">Injectables & Neurotoxins</div>
+
+      <div class="svc-pill reveal from-bottom">
+        <div class="svc-pill-icon">✦</div>
+        <div class="svc-pill-name">Botox / Dysport</div>
+        <p class="svc-pill-desc">Forehead, 11s, crow's feet, brow lift, lip flip, jaw slimming</p>
+        <div class="svc-pill-price">From $12/unit</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+      <div class="svc-pill reveal from-bottom reveal-delay-1">
+        <div class="svc-pill-icon">✦</div>
+        <div class="svc-pill-name">Lip Filler</div>
+        <p class="svc-pill-desc">Definition, volume, symmetry. Juvederm Ultra & Volbella</p>
+        <div class="svc-pill-price">From $649</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+      <div class="svc-pill reveal from-bottom reveal-delay-2">
+        <div class="svc-pill-icon">✦</div>
+        <div class="svc-pill-name">Cheek & Midface</div>
+        <p class="svc-pill-desc">Voluma for lifted cheekbones and youthful midface projection</p>
+        <div class="svc-pill-price">From $799</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+      <div class="svc-pill reveal from-bottom reveal-delay-3">
+        <div class="svc-pill-icon">✦</div>
+        <div class="svc-pill-name">Jawline & Chin</div>
+        <p class="svc-pill-desc">Sculpted definition, balanced profile, non-surgical contouring</p>
+        <div class="svc-pill-price">From $749</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+      <div class="svc-pill reveal from-bottom">
+        <div class="svc-pill-icon">✦</div>
+        <div class="svc-pill-name">Under-Eye / Tear Trough</div>
+        <p class="svc-pill-desc">Restylane to correct hollows, shadows, and under-eye fatigue</p>
+        <div class="svc-pill-price">From $699</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+      <div class="svc-pill reveal from-bottom reveal-delay-1">
+        <div class="svc-pill-icon">✦</div>
+        <div class="svc-pill-name">Nasolabial & Marionette</div>
+        <p class="svc-pill-desc">Soften deep lines around the mouth for a naturally rested look</p>
+        <div class="svc-pill-price">From $599</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+
+      <!-- SKIN -->
+      <div class="svc-category-label">Skin Treatments</div>
+
+      <div class="svc-pill reveal from-bottom">
+        <div class="svc-pill-icon">◇</div>
+        <div class="svc-pill-name">Microneedling</div>
+        <p class="svc-pill-desc">SkinPen collagen induction for texture, tone, and tightening</p>
+        <div class="svc-pill-price">From $350/session</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+      <div class="svc-pill reveal from-bottom reveal-delay-1">
+        <div class="svc-pill-icon">◇</div>
+        <div class="svc-pill-name">Chemical Peels</div>
+        <p class="svc-pill-desc">VI Peel, Jessner, TCA — hyperpigmentation, acne, aging</p>
+        <div class="svc-pill-price">From $199</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+      <div class="svc-pill reveal from-bottom reveal-delay-2">
+        <div class="svc-pill-icon">◇</div>
+        <div class="svc-pill-name">PRP Facial</div>
+        <p class="svc-pill-desc">Platelet-rich plasma applied topically or micro-infused for glow</p>
+        <div class="svc-pill-price">From $450</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+      <div class="svc-pill reveal from-bottom reveal-delay-3">
+        <div class="svc-pill-icon">◇</div>
+        <div class="svc-pill-name">Laser Resurfacing</div>
+        <p class="svc-pill-desc">Fractional laser for deep lines, sun damage, and skin renewal</p>
+        <div class="svc-pill-price">From $499</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+
+      <!-- WELLNESS -->
+      <div class="svc-category-label">Wellness & Body</div>
+
+      <div class="svc-pill reveal from-bottom">
+        <div class="svc-pill-icon">○</div>
+        <div class="svc-pill-name">IV Infusions</div>
+        <p class="svc-pill-desc">Myers Cocktail, Glow, Immunity, Hangover, Athletic Recovery</p>
+        <div class="svc-pill-price">From $175</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+      <div class="svc-pill reveal from-bottom reveal-delay-1">
+        <div class="svc-pill-icon">○</div>
+        <div class="svc-pill-name">Kybella</div>
+        <p class="svc-pill-desc">Permanent double-chin reduction with deoxycholic acid injections</p>
+        <div class="svc-pill-price">From $599/vial</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+      <div class="svc-pill reveal from-bottom reveal-delay-2">
+        <div class="svc-pill-icon">○</div>
+        <div class="svc-pill-name">Sculptra</div>
+        <p class="svc-pill-desc">Biostimulator for gradual, natural volume restoration over time</p>
+        <div class="svc-pill-price">From $899/vial</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+      <div class="svc-pill reveal from-bottom reveal-delay-3">
+        <div class="svc-pill-icon">○</div>
+        <div class="svc-pill-name">Free Consultation</div>
+        <p class="svc-pill-desc">45 minutes, no obligation. Walk away with a real, honest plan.</p>
+        <div class="svc-pill-price">Complimentary</div>
+        <a class="svc-pill-link" href="#contact">Book</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MEET THE TEAM ─── -->
+<section id="team">
+  <div class="section-wrap">
+    <div class="team-header reveal from-bottom">
+      <div>
+        <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Our Providers</div>
+        <h2 class="section-title">The team behind<br><em>every result.</em></h2>
+      </div>
+      <a class="btn-text reveal from-right" href="#contact" style="color:var(--bark-mid);flex-shrink:0;align-self:flex-end;">
+        Book With a Provider <span class="btn-text-arrow"></span>
+      </a>
+    </div>
+
+    <div class="team-grid">
+
+      <!-- LEAD — Sarah -->
+      <div class="team-card team-lead reveal from-bottom">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=900&q=85&fit=crop&crop=faces,top" alt="Sarah Chen NP" loading="lazy"/>
+          <div class="team-specialty-badge">Lead Injector · Founder</div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Sarah Chen, NP-C</div>
+          <div class="team-title">Board-Certified Nurse Practitioner · 12 Years Experience</div>
+          <p class="team-bio">Sarah founded Lumière in 2019 after a decade in emergency medicine. She's known for her soft-touch Botox, masterful filler placement, and the kind of honest consultation that keeps clients coming back for years.</p>
+          <div class="team-actions">
+            <a class="team-book-btn" href="#contact">Book With Sarah</a>
+            <a class="team-email-btn" href="mailto:sarah@lumierebenicia.com">sarah@lumierebenicia.com</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Provider 2 — Ashley -->
+      <div class="team-card reveal from-bottom reveal-delay-1">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&q=85&fit=crop&crop=faces,top" alt="Ashley Rivera PA-C" loading="lazy"/>
+          <div class="team-specialty-badge">Filler Specialist</div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Ashley Rivera, PA-C</div>
+          <div class="team-title">Physician Assistant · Filler & Neurotoxin</div>
+          <p class="team-bio">Ashley specializes in lip and cheek filler with an artist's eye for natural symmetry.</p>
+          <div class="team-actions">
+            <a class="team-book-btn" href="#contact">Book With Ashley</a>
+            <a class="team-email-btn" href="mailto:ashley@lumierebenicia.com">ashley@</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Provider 3 — Megan -->
+      <div class="team-card reveal from-bottom reveal-delay-2">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1614644147724-2d4785d69962?w=500&q=85&fit=crop&crop=faces,top" alt="Megan Torres RN" loading="lazy"/>
+          <div class="team-specialty-badge">Skin & Laser</div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Megan Torres, RN</div>
+          <div class="team-title">Registered Nurse · Skin Treatments</div>
+          <p class="team-bio">Megan leads all microneedling, peels, and laser protocols. Known for her thorough consultations and extraordinary results with stubborn skin concerns.</p>
+          <div class="team-actions">
+            <a class="team-book-btn" href="#contact">Book With Megan</a>
+            <a class="team-email-btn" href="mailto:megan@lumierebenicia.com">megan@</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Provider 4 — Priya -->
+      <div class="team-card reveal from-bottom reveal-delay-1">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=85&fit=crop&crop=faces,top" alt="Priya Nair NP" loading="lazy"/>
+          <div class="team-specialty-badge">IV & Wellness</div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Priya Nair, NP</div>
+          <div class="team-title">Nurse Practitioner · IV Wellness</div>
+          <p class="team-bio">Priya oversees the IV wellness program and handles full-face rejuvenation protocols for clients seeking comprehensive transformation.</p>
+          <div class="team-actions">
+            <a class="team-book-btn" href="#contact">Book With Priya</a>
+            <a class="team-email-btn" href="mailto:priya@lumierebenicia.com">priya@</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Provider 5 — Lauren -->
+      <div class="team-card reveal from-bottom reveal-delay-2">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=500&q=85&fit=crop&crop=faces,top" alt="Lauren Kim LE" loading="lazy"/>
+          <div class="team-specialty-badge">Licensed Esthetician</div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Lauren Kim, LE</div>
+          <div class="team-title">Licensed Esthetician · Skin Health</div>
+          <p class="team-bio">Lauren focuses on long-term skin health, customized facial protocols, and post-treatment care plans that extend and amplify every result.</p>
+          <div class="team-actions">
+            <a class="team-book-btn" href="#contact">Book With Lauren</a>
+            <a class="team-email-btn" href="mailto:lauren@lumierebenicia.com">lauren@</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1424,55 +1713,55 @@ document.querySelectorAll('.service-card').forEach(card => {
 (function() {
   const RESULTS = [
     {
-      img:       'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=900&q=90&fit=crop&crop=faces,top',
+      img:       'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Botox — Forehead & 11s',
       meta:      'Dysport · 42 units · Natural brow lift, full relaxation of glabellar lines',
       sessions:  '1 Visit'
     },
     {
-      img:       'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=900&q=90&fit=crop&crop=faces,top',
+      img:       'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Lip Enhancement',
       meta:      'Juvederm Ultra Plus · 1ml · Definition, symmetry, subtle volume',
       sessions:  '1 Visit'
     },
     {
-      img:       'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=900&q=90&fit=crop&crop=faces,top',
+      img:       'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Cheek Contouring',
       meta:      'Voluma · 2ml bilateral · Lifted midface, refined cheekbone definition',
       sessions:  '1 Visit'
     },
     {
-      img:       'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&q=90&fit=crop&crop=faces,top',
+      img:       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Microneedling Series',
-      meta:      'SkinPen · Series of 3 · Pore refinement, texture improvement, radiance',
+      meta:      'SkinPen · Series of 3 · Pore refinement, texture improvement, lasting radiance',
       sessions:  '3 Visits'
     },
     {
-      img:       'https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=900&q=90&fit=crop&crop=faces,top',
+      img:       'https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'PRP Skin Revival',
       meta:      'Platelet-Rich Plasma · 4 sessions · Collagen induction, glow restoration',
       sessions:  '4 Visits'
     },
     {
-      img:       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&q=90&fit=crop&crop=faces,top',
+      img:       'https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Chemical Peel',
       meta:      'VI Peel Precision Plus · Hyperpigmentation, fine lines, evenness',
       sessions:  '2 Visits'
     },
     {
-      img:       'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=900&q=90&fit=crop&crop=faces,top',
+      img:       'https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Full Face Rejuvenation',
       meta:      'Botox + Filler + Microneedling · Comprehensive age reversal protocol',
       sessions:  '3 Visits'
     },
     {
-      img:       'https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=900&q=90&fit=crop&crop=faces,top',
+      img:       'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Skin Texture & Tone',
       meta:      'Microneedling + PRP + VI Peel · Multi-modality skin transformation',
       sessions:  '4 Visits'
     },
     {
-      img:       'https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=900&q=90&fit=crop&crop=faces,top',
+      img:       'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Under-Eye Restoration',
       meta:      'Restylane · Tear Trough · Hollow correction, dark shadow elimination',
       sessions:  '1 Visit'
