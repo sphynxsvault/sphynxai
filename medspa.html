@@ -139,6 +139,7 @@
   /* Hero right */
   .hero-right { position:relative; overflow:hidden; background:linear-gradient(135deg,var(--blush-pale) 0%,var(--cream) 50%,var(--gold-pale) 100%); }
   .hero-right-parallax { position:absolute; inset:-10%; width:120%; height:120%; will-change:transform; }
+  .hero-right-parallax img { width:100%; height:100%; object-fit:cover; }
   .hero-art { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
 
   /* Animated gradient in hero right */
@@ -227,19 +228,61 @@
   .credential { display:flex; align-items:center; gap:14px; font-size:13px; color:var(--fg-mid); font-weight:300; }
   .credential-dot { width:6px; height:6px; border-radius:50%; background:var(--blush); flex-shrink:0; }
 
-  /* ─── RESULTS ─── */
+  /* ─── SPECIALS ─── */
+  #specials { padding:112px 0; background:var(--bark); position:relative; overflow:hidden; }
+  #specials::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 20% 50%, rgba(232,180,160,0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(212,180,138,0.07) 0%, transparent 55%); pointer-events:none; }
+  .specials-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:60px; }
+  #specials .section-eyebrow { color:var(--blush); }
+  #specials .section-eyebrow-line { background:rgba(232,180,160,0.4); }
+  #specials .section-title { color:var(--parchment); }
+  #specials .section-title em { color:var(--blush); }
+  .specials-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+  .special-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); padding:52px 52px 48px; position:relative; overflow:hidden; transition:background 0.35s, transform 0.3s; cursor:none; }
+  .special-card:hover { background:rgba(255,255,255,0.07); transform:translateY(-3px); }
+  .special-card.featured { background:linear-gradient(145deg, rgba(232,180,160,0.12), rgba(212,180,138,0.08)); border-color:rgba(232,180,160,0.2); grid-column:span 2; display:grid; grid-template-columns:1fr 1fr; gap:52px; align-items:center; }
+  .special-badge { display:inline-flex; align-items:center; gap:10px; background:var(--rose); color:var(--warm-white); font-size:9px; letter-spacing:0.3em; text-transform:uppercase; padding:7px 16px; border-radius:2px; margin-bottom:28px; font-weight:400; }
+  .special-badge-dot { width:4px; height:4px; border-radius:50%; background:rgba(254,252,248,0.6); }
+  .special-name { font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:300; color:var(--parchment); line-height:1.15; margin-bottom:16px; }
+  .special-name em { font-style:italic; color:var(--blush); }
+  .special-desc { font-size:13px; font-weight:300; line-height:1.85; color:rgba(250,246,240,0.55); margin-bottom:36px; max-width:380px; }
+  .special-pricing { display:flex; align-items:baseline; gap:14px; margin-bottom:32px; }
+  .special-price-new { font-family:'Cormorant Garamond',serif; font-size:44px; font-weight:300; color:var(--parchment); line-height:1; }
+  .special-price-old { font-size:18px; color:rgba(250,246,240,0.3); text-decoration:line-through; font-weight:300; }
+  .special-save { font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--blush); background:rgba(232,180,160,0.12); padding:5px 12px; border-radius:2px; }
+  .special-btn { display:inline-flex; align-items:center; gap:10px; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--parchment); border:1px solid rgba(250,246,240,0.2); padding:14px 32px; text-decoration:none; transition:background 0.25s, border-color 0.25s, transform 0.2s; cursor:none; border-radius:2px; }
+  .special-btn:hover { background:rgba(255,255,255,0.1); border-color:rgba(250,246,240,0.4); transform:translateY(-1px); }
+  .special-expires { font-size:11px; color:rgba(250,246,240,0.3); letter-spacing:0.08em; margin-top:20px; }
+  .special-visual { position:relative; border-radius:4px; overflow:hidden; aspect-ratio:4/3; }
+  .special-visual img { width:100%; height:100%; object-fit:cover; filter:brightness(0.85) saturate(0.9); }
+  .special-visual-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(90,74,58,0.3),transparent); }
+  .special-tag { position:absolute; top:24px; right:24px; background:var(--rose); color:var(--warm-white); font-size:9px; letter-spacing:0.28em; text-transform:uppercase; padding:8px 14px; border-radius:2px; }
+
+  /* ─── RESULTS / GALLERY ─── */
   #results { padding:120px 0 112px; background:var(--warm-white); }
   .results-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:64px; }
+
+  /* Photo gallery strip */
+  .gallery-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:3px; margin-bottom:72px; }
+  .gallery-item { position:relative; overflow:hidden; aspect-ratio:3/4; cursor:none; }
+  .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s ease, filter 0.4s ease; filter:saturate(0.85) brightness(0.95); }
+  .gallery-item:hover img { transform:scale(1.05); filter:saturate(1.0) brightness(1.0); }
+  .gallery-item-label { position:absolute; bottom:0; left:0; right:0; padding:20px 18px 16px; background:linear-gradient(to top, rgba(58,46,36,0.75) 0%, transparent 100%); opacity:0; transition:opacity 0.3s; }
+  .gallery-item:hover .gallery-item-label { opacity:1; }
+  .gallery-item-treatment { font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--parchment); font-weight:300; }
+  .gallery-item.tall { grid-row:span 2; aspect-ratio:auto; }
+
+  /* Before/after cards */
   .results-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
   .result-card { border-radius:4px; overflow:hidden; border:1px solid var(--border); transition:box-shadow 0.35s, transform 0.35s; background:var(--warm-white); cursor:none; }
   .result-card:hover { box-shadow:var(--shadow-warm); transform:translateY(-5px); }
-  .result-visual { display:grid; grid-template-columns:1fr 1fr; height:220px; position:relative; }
-  .result-panel { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; position:relative; }
-  .result-panel.before { background:linear-gradient(160deg,#f0ebe5,#e8e0d8); }
-  .result-panel.after { background:linear-gradient(160deg,var(--blush-pale),var(--gold-pale)); }
-  .result-panel-label { position:absolute; top:14px; left:16px; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bark-soft); }
-  .result-panel.after .result-panel-label { color:var(--rose); }
-  .result-divider-line { position:absolute; left:50%; top:12px; bottom:12px; width:1px; background:rgba(90,74,58,0.12); transform:translateX(-50%); display:flex; align-items:center; justify-content:center; }
+  .result-visual { position:relative; height:260px; overflow:hidden; }
+  .result-visual img { width:100%; height:100%; object-fit:cover; }
+  .result-visual-split { display:grid; grid-template-columns:1fr 1fr; height:100%; }
+  .result-panel { overflow:hidden; position:relative; }
+  .result-panel img { width:100%; height:100%; object-fit:cover; }
+  .result-panel-label { position:absolute; top:14px; left:14px; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,255,255,0.9); background:rgba(58,46,36,0.5); padding:4px 10px; border-radius:2px; backdrop-filter:blur(4px); }
+  .result-panel.after .result-panel-label { color:var(--parchment); background:rgba(201,122,106,0.6); }
+  .result-divider-line { position:absolute; left:50%; top:0; bottom:0; width:2px; background:rgba(254,252,248,0.6); transform:translateX(-50%); display:flex; align-items:center; justify-content:center; z-index:2; }
   .result-divider-pill { background:var(--warm-white); border:1px solid var(--border); border-radius:20px; padding:4px 8px; font-size:9px; letter-spacing:0.1em; color:var(--fg-soft); white-space:nowrap; }
   .result-info { padding:22px 24px; border-top:1px solid var(--border); }
   .result-treatment { font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:400; color:var(--bark); margin-bottom:4px; }
@@ -357,8 +400,12 @@
     .section-wrap { padding:0 32px; }
     .services-header { flex-direction:column; align-items:flex-start; gap:12px; }
     .services-grid { grid-template-columns:1fr; }
+    .specials-grid { grid-template-columns:1fr; }
+    .special-card.featured { grid-column:span 1; grid-template-columns:1fr; gap:32px; }
+    .special-visual { aspect-ratio:16/9; }
     .about-inner { grid-template-columns:1fr; gap:48px; }
     .about-cert { right:0; bottom:-16px; }
+    .gallery-strip { grid-template-columns:repeat(2,1fr); }
     .results-header { flex-direction:column; align-items:flex-start; gap:12px; }
     .results-grid { grid-template-columns:1fr; }
     .testi-page { grid-template-columns:1fr; gap:16px; }
@@ -410,6 +457,7 @@
 
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
+    <li><a href="#specials">Specials</a></li>
     <li><a href="#results">Results</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -448,23 +496,7 @@
 
   <div class="hero-right">
     <div class="hero-right-parallax" id="heroParallax">
-      <div class="hero-art">
-        <svg width="100%" height="100%" viewBox="0 0 600 700" fill="none" preserveAspectRatio="xMidYMid slice">
-          <ellipse cx="320" cy="380" rx="260" ry="310" fill="rgba(232,180,160,0.18)" transform="rotate(-8 320 380)"/>
-          <ellipse cx="310" cy="370" rx="180" ry="240" fill="rgba(212,180,138,0.15)" transform="rotate(-4 310 370)"/>
-          <circle cx="440" cy="160" r="80" stroke="rgba(201,160,106,0.2)" stroke-width="1" fill="none"/>
-          <circle cx="440" cy="160" r="55" stroke="rgba(201,160,106,0.15)" stroke-width="1" fill="none"/>
-          <circle cx="440" cy="160" r="30" fill="rgba(201,160,106,0.12)"/>
-          <circle cx="440" cy="160" r="10" fill="rgba(201,160,106,0.4)"/>
-          <path d="M120 480 C140 440 160 400 150 350 C140 300 120 280 130 240 C140 200 180 190 200 160" stroke="rgba(143,168,146,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <path d="M150 350 C180 340 210 345 230 330" stroke="rgba(143,168,146,0.28)" stroke-width="1" fill="none" stroke-linecap="round"/>
-          <path d="M140 300 C160 288 185 292 200 278" stroke="rgba(143,168,146,0.22)" stroke-width="1" fill="none" stroke-linecap="round"/>
-          <ellipse cx="232" cy="328" rx="14" ry="8" fill="rgba(143,168,146,0.22)" transform="rotate(-30 232 328)"/>
-          <ellipse cx="202" cy="276" rx="12" ry="7" fill="rgba(143,168,146,0.18)" transform="rotate(-45 202 276)"/>
-          <path d="M500 80 C520 70 540 80 530 100 C520 120 500 110 500 80Z" fill="rgba(232,180,160,0.3)"/>
-          <path d="M480 100 C495 90 510 95 505 110 C500 125 482 118 480 100Z" fill="rgba(212,180,138,0.25)"/>
-        </svg>
-      </div>
+      <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=900&q=85&fit=crop&crop=faces,center" alt="Med spa treatment" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(0.9) brightness(0.97);" loading="eager"/>
     </div>
 
     <div class="hero-badge">
@@ -578,31 +610,79 @@
   </div>
 </section>
 
+<!-- ─── SPECIALS ─── -->
+<section id="specials">
+  <div class="section-wrap">
+    <div class="specials-header reveal from-bottom">
+      <div>
+        <div class="section-eyebrow"><span class="section-eyebrow-line"></span>This Month</div>
+        <h2 class="section-title">Exclusive <em>offers</em><br>for new clients.</h2>
+      </div>
+      <a class="btn-text reveal from-right" href="#contact" style="color:rgba(250,246,240,0.5);flex-shrink:0;align-self:flex-end;">
+        Book Now <span class="btn-text-arrow"></span>
+      </a>
+    </div>
+
+    <div class="specials-grid">
+      <!-- FEATURED SPECIAL -->
+      <div class="special-card featured reveal from-bottom">
+        <div>
+          <div class="special-badge"><span class="special-badge-dot"></span>November Special</div>
+          <div class="special-name">New Client<br><em>Welcome Package</em></div>
+          <p class="special-desc">Your first visit, fully covered. Includes a 45-minute consultation, personalized treatment plan, and your first Botox or filler session at our best rate — ever.</p>
+          <div class="special-pricing">
+            <div class="special-price-new">$299</div>
+            <div class="special-price-old">$550</div>
+            <div class="special-save">Save $251</div>
+          </div>
+          <a class="special-btn" href="#contact">Claim This Offer</a>
+          <div class="special-expires">Offer expires November 30, 2026 · Limited spots available</div>
+        </div>
+        <div class="special-visual">
+          <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=700&q=85&fit=crop&crop=center" alt="Botox treatment" loading="lazy"/>
+          <div class="special-visual-overlay"></div>
+          <div class="special-tag">Most Popular</div>
+        </div>
+      </div>
+
+      <!-- SPECIAL 2 -->
+      <div class="special-card reveal from-bottom reveal-delay-1">
+        <div class="special-badge"><span class="special-badge-dot"></span>Limited Time</div>
+        <div class="special-name">Lip Filler<br><em>+ Free Touch-Up</em></div>
+        <p class="special-desc">Full lip filler treatment with a complimentary 2-week touch-up included. The look you want, perfected.</p>
+        <div class="special-pricing">
+          <div class="special-price-new">$649</div>
+          <div class="special-price-old">$800</div>
+          <div class="special-save">Save $151</div>
+        </div>
+        <a class="special-btn" href="#contact">Book This</a>
+        <div class="special-expires">Through November 2026</div>
+      </div>
+
+      <!-- SPECIAL 3 -->
+      <div class="special-card reveal from-bottom reveal-delay-2">
+        <div class="special-badge"><span class="special-badge-dot"></span>Package Deal</div>
+        <div class="special-name">Microneedling<br><em>Series of 3</em></div>
+        <p class="special-desc">Three microneedling sessions at a bundled rate. The minimum for real, lasting results — and the most cost-effective way to start.</p>
+        <div class="special-pricing">
+          <div class="special-price-new">$799</div>
+          <div class="special-price-old">$1,050</div>
+          <div class="special-save">Save $251</div>
+        </div>
+        <a class="special-btn" href="#contact">Book This</a>
+        <div class="special-expires">Spaces limited — book to hold your rate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── ABOUT ─── -->
 <section id="about">
   <div class="section-wrap">
     <div class="about-inner">
       <div class="about-visual reveal from-left">
         <div class="about-portrait">
-          <svg width="100%" height="100%" viewBox="0 0 400 500" fill="none" preserveAspectRatio="xMidYMax meet">
-            <rect width="400" height="500" fill="url(#portraitBg)"/>
-            <defs>
-              <linearGradient id="portraitBg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#faeae4"/>
-                <stop offset="60%" stop-color="#ede0cc"/>
-                <stop offset="100%" stop-color="#d6e4d8"/>
-              </linearGradient>
-            </defs>
-            <ellipse cx="300" cy="100" rx="90" ry="90" fill="rgba(232,180,160,0.25)"/>
-            <ellipse cx="280" cy="120" rx="60" ry="60" fill="rgba(201,160,106,0.2)"/>
-            <path d="M50 460 C80 400 100 340 90 280 C80 220 60 200 70 160" stroke="rgba(143,168,146,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <ellipse cx="92" cy="278" rx="18" ry="10" fill="rgba(143,168,146,0.3)" transform="rotate(-25 92 278)"/>
-            <ellipse cx="72" cy="230" rx="14" ry="8" fill="rgba(143,168,146,0.25)" transform="rotate(-40 72 230)"/>
-            <ellipse cx="200" cy="180" rx="65" ry="75" fill="rgba(90,74,58,0.08)"/>
-            <ellipse cx="200" cy="175" rx="55" ry="62" fill="rgba(201,160,106,0.15)"/>
-            <path d="M145 315 C142 280 160 262 200 262 C240 262 258 280 255 315 L265 440 L135 440 Z" fill="rgba(254,252,248,0.6)"/>
-            <text x="200" y="480" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="13" fill="rgba(90,74,58,0.4)" font-style="italic">Your provider awaits</text>
-          </svg>
+          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&q=85&fit=crop&crop=faces,top" alt="Medical aesthetics provider" style="width:100%;height:100%;object-fit:cover;object-position:center top;" loading="lazy"/>
         </div>
         <div class="about-cert">
           <div class="about-cert-icon">✦</div>
@@ -641,18 +721,40 @@
         Book Now <span class="btn-text-arrow"></span>
       </a>
     </div>
+
+    <!-- PHOTO GALLERY STRIP -->
+    <div class="gallery-strip reveal from-bottom">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400&q=80&fit=crop&crop=faces,top" alt="Skin treatment result" loading="lazy"/>
+        <div class="gallery-item-label"><div class="gallery-item-treatment">Skin Rejuvenation</div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=80&fit=crop&crop=faces,center" alt="Facial treatment" loading="lazy"/>
+        <div class="gallery-item-label"><div class="gallery-item-treatment">Dermal Filler</div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&q=80&fit=crop&crop=center" alt="Med spa treatment" loading="lazy"/>
+        <div class="gallery-item-label"><div class="gallery-item-treatment">PRP Therapy</div></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&q=80&fit=crop&crop=faces,top" alt="Beauty treatment" loading="lazy"/>
+        <div class="gallery-item-label"><div class="gallery-item-treatment">Botox Treatment</div></div>
+      </div>
+    </div>
+
+    <!-- BEFORE / AFTER CARDS -->
     <div class="results-grid">
       <div class="result-card reveal from-bottom">
         <div class="result-visual">
-          <div class="result-panel before">
-            <span class="result-panel-label">Before</span>
-            <div class="skin-before" style="margin-top:32px;"></div>
-            <svg width="60" height="20" viewBox="0 0 60 20" style="margin-top:6px;opacity:0.4;"><path d="M5 10 Q15 6 25 10 Q35 14 45 10 Q52 7 58 10" stroke="#5a4a3a" stroke-width="1" fill="none" stroke-linecap="round"/><path d="M5 15 Q15 11 25 15 Q35 19 45 15" stroke="#5a4a3a" stroke-width="0.8" fill="none" stroke-linecap="round"/></svg>
-          </div>
-          <div class="result-panel after">
-            <span class="result-panel-label">After</span>
-            <div class="skin-after" style="margin-top:32px;"></div>
-            <div style="width:60px;height:20px;margin-top:6px;"></div>
+          <div class="result-visual-split">
+            <div class="result-panel before">
+              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=300&q=75&fit=crop&crop=faces" alt="Before treatment" loading="lazy" style="filter:saturate(0.7) brightness(0.9);"/>
+              <span class="result-panel-label">Before</span>
+            </div>
+            <div class="result-panel after">
+              <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&q=75&fit=crop&crop=faces" alt="After treatment" loading="lazy" style="filter:saturate(1.0) brightness(1.02);"/>
+              <span class="result-panel-label">After</span>
+            </div>
           </div>
           <div class="result-divider-line"><div class="result-divider-pill">before · after</div></div>
         </div>
@@ -664,13 +766,15 @@
 
       <div class="result-card reveal from-bottom reveal-delay-1">
         <div class="result-visual">
-          <div class="result-panel before">
-            <span class="result-panel-label">Before</span>
-            <svg width="80" height="40" viewBox="0 0 80 40" fill="none" style="margin-top:80px;"><path d="M15 28 Q40 22 65 28" stroke="#9a8878" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
-          </div>
-          <div class="result-panel after">
-            <span class="result-panel-label">After</span>
-            <svg width="80" height="40" viewBox="0 0 80 40" fill="none" style="margin-top:80px;"><path d="M12 30 Q40 18 68 30" stroke="#c97a6a" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="40" cy="32" rx="20" ry="6" fill="rgba(201,122,106,0.2)"/></svg>
+          <div class="result-visual-split">
+            <div class="result-panel before">
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=300&q=75&fit=crop&crop=faces" alt="Before lip filler" loading="lazy" style="filter:saturate(0.7) brightness(0.88);"/>
+              <span class="result-panel-label">Before</span>
+            </div>
+            <div class="result-panel after">
+              <img src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=300&q=75&fit=crop&crop=faces" alt="After lip filler" loading="lazy" style="filter:saturate(1.05) brightness(1.0);"/>
+              <span class="result-panel-label">After</span>
+            </div>
           </div>
           <div class="result-divider-line"><div class="result-divider-pill">before · after</div></div>
         </div>
@@ -682,13 +786,15 @@
 
       <div class="result-card reveal from-bottom reveal-delay-2">
         <div class="result-visual">
-          <div class="result-panel before">
-            <span class="result-panel-label">Before</span>
-            <div class="skin-before" style="margin-top:32px;width:80px;height:80px;border-radius:12px;"></div>
-          </div>
-          <div class="result-panel after">
-            <span class="result-panel-label">After</span>
-            <div class="skin-after" style="margin-top:32px;width:80px;height:80px;border-radius:12px;background:radial-gradient(circle at 35% 35%,#f5e8d8,#e8d0b8);"></div>
+          <div class="result-visual-split">
+            <div class="result-panel before">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=75&fit=crop&crop=faces" alt="Before skin treatment" loading="lazy" style="filter:saturate(0.65) brightness(0.85);"/>
+              <span class="result-panel-label">Before</span>
+            </div>
+            <div class="result-panel after">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=75&fit=crop&crop=faces" alt="After skin treatment" loading="lazy" style="filter:saturate(1.0) brightness(1.03);"/>
+              <span class="result-panel-label">After</span>
+            </div>
           </div>
           <div class="result-divider-line"><div class="result-divider-pill">before · after</div></div>
         </div>
@@ -872,7 +978,8 @@
         <li class="footer-link-item"><a href="#services">Dermal Fillers</a></li>
         <li class="footer-link-item"><a href="#services">Skin Resurfacing</a></li>
         <li class="footer-link-item"><a href="#services">PRP Therapy</a></li>
-        <li class="footer-link-item"><a href="#services">IV Wellness</a></li>
+        <li class="footer-link-item"><a href="#specials">Monthly Specials</a></li>
+        <li class="footer-link-item"><a href="#results">Before & After</a></li>
       </ul>
     </div>
     <div>
