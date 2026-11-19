@@ -281,50 +281,48 @@
   }
   .result-card:hover { box-shadow:0 12px 48px rgba(90,74,58,0.14); transform:translateY(-6px); }
 
-  /* Split before/after visual */
-  .result-visual { position:relative; height:280px; overflow:hidden; }
-  .result-ba-wrap { display:grid; grid-template-columns:1fr 1fr; height:100%; position:relative; }
-  .result-panel { overflow:hidden; position:relative; }
-  .result-panel img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
-  .result-panel.before img { filter:saturate(0.45) brightness(0.88) contrast(1.05); }
-  .result-panel.after img  { filter:saturate(1.1) brightness(1.03) contrast(1.02); }
-  .result-panel-label {
-    position:absolute; top:12px; left:12px;
+  /* Result card — single photo + overlay treatment card */
+  .result-visual { position:relative; height:320px; overflow:hidden; }
+  .result-visual img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; transition:transform 0.6s ease, filter 0.4s ease; filter:saturate(0.88) brightness(0.96); }
+  .result-card:hover .result-visual img { transform:scale(1.04); filter:saturate(0.95) brightness(1.0); }
+
+  /* BEFORE badge top-left */
+  .result-badge-before {
+    position:absolute; top:14px; left:14px; z-index:3;
     font-size:9px; letter-spacing:0.28em; text-transform:uppercase;
-    color:var(--parchment); padding:4px 10px; border-radius:2px;
-    backdrop-filter:blur(6px);
-  }
-  .result-panel.before .result-panel-label { background:rgba(58,46,36,0.55); }
-  .result-panel.after  .result-panel-label { background:rgba(201,122,106,0.72); }
-
-  /* Centre divider */
-  .result-divider {
-    position:absolute; left:50%; top:0; bottom:0; width:2px;
-    background:rgba(254,252,248,0.75); transform:translateX(-50%);
-    display:flex; align-items:center; justify-content:center; z-index:3;
-  }
-  .result-divider-pill {
-    background:var(--warm-white); border:1px solid rgba(90,74,58,0.15);
-    border-radius:20px; padding:5px 10px;
-    font-size:9px; letter-spacing:0.1em; color:var(--fg-soft); white-space:nowrap;
-    box-shadow:0 2px 8px rgba(90,74,58,0.1);
+    color:var(--parchment); background:rgba(58,46,36,0.68);
+    backdrop-filter:blur(6px); padding:5px 11px; border-radius:2px;
+    border:1px solid rgba(254,252,248,0.15);
   }
 
-  /* Hover overlay — "View" */
-  .result-view-overlay {
-    position:absolute; inset:0; background:rgba(58,46,36,0.0);
-    display:flex; align-items:center; justify-content:center;
-    transition:background 0.35s; z-index:4; pointer-events:none;
+  /* AFTER treatment overlay — slides up on hover */
+  .result-after-overlay {
+    position:absolute; bottom:0; left:0; right:0; z-index:4;
+    background:linear-gradient(to top, rgba(20,14,10,0.92) 0%, rgba(20,14,10,0.6) 60%, transparent 100%);
+    padding:28px 20px 20px;
+    transform:translateY(30px); opacity:0;
+    transition:transform 0.38s ease, opacity 0.38s ease;
   }
-  .result-card:hover .result-view-overlay { background:rgba(58,46,36,0.18); }
-  .result-view-btn {
-    font-size:10px; letter-spacing:0.28em; text-transform:uppercase;
-    color:var(--parchment); background:rgba(90,74,58,0.75);
-    backdrop-filter:blur(8px); padding:12px 24px; border-radius:2px;
-    opacity:0; transform:translateY(8px); transition:opacity 0.3s, transform 0.3s;
-    border:1px solid rgba(254,252,248,0.2);
+  .result-card:hover .result-after-overlay { transform:translateY(0); opacity:1; }
+
+  .result-after-label {
+    font-size:9px; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--blush); margin-bottom:7px;
   }
-  .result-card:hover .result-view-btn { opacity:1; transform:translateY(0); }
+  .result-after-headline {
+    font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:300;
+    color:var(--parchment); line-height:1.3; margin-bottom:10px;
+  }
+  .result-after-stats { display:flex; gap:16px; }
+  .result-stat { display:flex; flex-direction:column; gap:2px; }
+  .result-stat-val { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; color:var(--parchment); line-height:1; }
+  .result-stat-lbl { font-size:9px; letter-spacing:0.14em; color:rgba(250,246,240,0.5); text-transform:uppercase; }
+
+  /* Progress bar */
+  .result-progress { margin-top:12px; }
+  .result-progress-track { height:2px; background:rgba(254,252,248,0.15); border-radius:1px; overflow:hidden; }
+  .result-progress-fill { height:100%; background:linear-gradient(to right, var(--blush), var(--gold-light)); border-radius:1px; }
+  .result-progress-label { font-size:9px; color:rgba(250,246,240,0.45); letter-spacing:0.1em; margin-top:5px; }
 
   .result-info { padding:20px 24px 22px; border-top:1px solid var(--border); }
   .result-treatment { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:400; color:var(--bark); margin-bottom:5px; }
@@ -348,19 +346,26 @@
     box-shadow:0 32px 96px rgba(0,0,0,0.5);
   }
   #lb-overlay.open .lb-box { transform:scale(1); }
-  .lb-visual { display:grid; grid-template-columns:1fr 1fr; height:480px; }
-  .lb-panel { overflow:hidden; position:relative; }
-  .lb-panel img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
-  .lb-panel.before img { filter:saturate(0.45) brightness(0.88) contrast(1.05); }
-  .lb-panel.after  img { filter:saturate(1.1) brightness(1.03) contrast(1.02); }
-  .lb-panel-label {
-    position:absolute; top:16px; left:16px;
-    font-size:9px; letter-spacing:0.3em; text-transform:uppercase;
-    color:var(--parchment); padding:5px 12px; border-radius:2px;
+  .lb-visual { position:relative; height:420px; overflow:hidden; }
+  .lb-visual img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; filter:saturate(0.9) brightness(0.95); }
+  .lb-visual-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(20,14,10,0.88) 0%, rgba(20,14,10,0.3) 50%, transparent 100%);
   }
-  .lb-panel.before .lb-panel-label { background:rgba(58,46,36,0.6); }
-  .lb-panel.after  .lb-panel-label { background:rgba(201,122,106,0.8); }
-  .lb-divider { position:absolute; left:50%; top:0; bottom:0; width:2px; background:rgba(254,252,248,0.6); transform:translateX(-50%); z-index:2; }
+  .lb-visual-stats {
+    position:absolute; bottom:28px; left:36px; right:36px; z-index:3;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  .lb-stat-block { }
+  .lb-stat-val { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; color:var(--parchment); line-height:1; }
+  .lb-stat-lbl { font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(250,246,240,0.5); margin-top:4px; }
+  .lb-visual-badge {
+    position:absolute; top:20px; left:20px; z-index:3;
+    font-size:9px; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--parchment); background:rgba(58,46,36,0.65);
+    backdrop-filter:blur(6px); padding:6px 14px; border-radius:2px;
+    border:1px solid rgba(254,252,248,0.15);
+  }
   .lb-info { padding:28px 36px 32px; display:flex; justify-content:space-between; align-items:center; }
   .lb-treatment { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:300; color:var(--bark); }
   .lb-meta { font-size:13px; color:var(--fg-soft); font-weight:300; margin-top:4px; }
@@ -388,6 +393,10 @@
   .lb-prev { left:16px; }
   .lb-next { right:16px; }
   .lb-counter { position:absolute; bottom:16px; left:50%; transform:translateX(-50%); font-size:11px; letter-spacing:0.2em; color:rgba(254,252,248,0.5); }
+
+  /* Results footnote */
+  .results-footnote { margin-top:48px; padding-top:32px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  .results-footnote p { font-size:12px; color:var(--fg-soft); font-weight:300; font-style:italic; }
 
   /* legacy — keep for compat */
   .skin-before { display:none; }
@@ -900,24 +909,24 @@
       </div>
     </div>
 
-    <!-- BEFORE / AFTER CARDS — 9 cards, same person each pair via CSS filter split -->
+    <!-- RESULT CARDS — 9 cards, single portrait photo + hover overlay treatment stats -->
     <div class="results-grid" id="resultsGrid">
 
       <!-- CARD 1 — Botox -->
       <div class="result-card reveal from-bottom" data-index="0" onclick="openLightbox(0)">
         <div class="result-visual">
-          <div class="result-ba-wrap">
-            <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=85&fit=crop&crop=faces,top" alt="Before Botox" loading="lazy"/>
-              <span class="result-panel-label">Before</span>
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=500&q=85&fit=crop&crop=faces,top" alt="Botox result" loading="lazy"/>
+          <div class="result-badge-before">Client Result</div>
+          <div class="result-after-overlay">
+            <div class="result-after-label">After Treatment</div>
+            <div class="result-after-headline">Forehead lines eliminated.<br>Natural movement preserved.</div>
+            <div class="result-after-stats">
+              <div class="result-stat"><span class="result-stat-val">94%</span><span class="result-stat-lbl">Line reduction</span></div>
+              <div class="result-stat"><span class="result-stat-val">42u</span><span class="result-stat-lbl">Dysport units</span></div>
+              <div class="result-stat"><span class="result-stat-val">1</span><span class="result-stat-lbl">Visit</span></div>
             </div>
-            <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=85&fit=crop&crop=faces,top" alt="After Botox" loading="lazy"/>
-              <span class="result-panel-label">After</span>
-            </div>
+            <div class="result-progress"><div class="result-progress-track"><div class="result-progress-fill" style="width:94%"></div></div><div class="result-progress-label">Satisfaction score · 94/100</div></div>
           </div>
-          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
-          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
         </div>
         <div class="result-info">
           <div class="result-treatment">Botox — Forehead & 11s</div>
@@ -928,18 +937,18 @@
       <!-- CARD 2 — Lip Filler -->
       <div class="result-card reveal from-bottom reveal-delay-1" data-index="1" onclick="openLightbox(1)">
         <div class="result-visual">
-          <div class="result-ba-wrap">
-            <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=85&fit=crop&crop=faces,top" alt="Before lip filler" loading="lazy"/>
-              <span class="result-panel-label">Before</span>
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=500&q=85&fit=crop&crop=faces,top" alt="Lip filler result" loading="lazy"/>
+          <div class="result-badge-before">Client Result</div>
+          <div class="result-after-overlay">
+            <div class="result-after-label">After Treatment</div>
+            <div class="result-after-headline">Fuller lips.<br>Perfect symmetry. Zero duck.</div>
+            <div class="result-after-stats">
+              <div class="result-stat"><span class="result-stat-val">1ml</span><span class="result-stat-lbl">Juvederm</span></div>
+              <div class="result-stat"><span class="result-stat-val">2wk</span><span class="result-stat-lbl">Final result</span></div>
+              <div class="result-stat"><span class="result-stat-val">1</span><span class="result-stat-lbl">Visit</span></div>
             </div>
-            <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=85&fit=crop&crop=faces,top" alt="After lip filler" loading="lazy"/>
-              <span class="result-panel-label">After</span>
-            </div>
+            <div class="result-progress"><div class="result-progress-track"><div class="result-progress-fill" style="width:97%"></div></div><div class="result-progress-label">Client satisfaction · 97/100</div></div>
           </div>
-          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
-          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
         </div>
         <div class="result-info">
           <div class="result-treatment">Lip Enhancement</div>
@@ -950,18 +959,18 @@
       <!-- CARD 3 — Cheek Filler -->
       <div class="result-card reveal from-bottom reveal-delay-2" data-index="2" onclick="openLightbox(2)">
         <div class="result-visual">
-          <div class="result-ba-wrap">
-            <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=85&fit=crop&crop=faces,top" alt="Before cheek filler" loading="lazy"/>
-              <span class="result-panel-label">Before</span>
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=85&fit=crop&crop=faces,top" alt="Cheek filler result" loading="lazy"/>
+          <div class="result-badge-before">Client Result</div>
+          <div class="result-after-overlay">
+            <div class="result-after-label">After Treatment</div>
+            <div class="result-after-headline">Lifted cheekbones.<br>Youthful midface projection.</div>
+            <div class="result-after-stats">
+              <div class="result-stat"><span class="result-stat-val">2ml</span><span class="result-stat-lbl">Voluma</span></div>
+              <div class="result-stat"><span class="result-stat-val">18mo</span><span class="result-stat-lbl">Duration</span></div>
+              <div class="result-stat"><span class="result-stat-val">1</span><span class="result-stat-lbl">Visit</span></div>
             </div>
-            <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=85&fit=crop&crop=faces,top" alt="After cheek filler" loading="lazy"/>
-              <span class="result-panel-label">After</span>
-            </div>
+            <div class="result-progress"><div class="result-progress-track"><div class="result-progress-fill" style="width:92%"></div></div><div class="result-progress-label">Client satisfaction · 92/100</div></div>
           </div>
-          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
-          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
         </div>
         <div class="result-info">
           <div class="result-treatment">Cheek Contouring</div>
@@ -972,18 +981,18 @@
       <!-- CARD 4 — Microneedling -->
       <div class="result-card reveal from-bottom" data-index="3" onclick="openLightbox(3)">
         <div class="result-visual">
-          <div class="result-ba-wrap">
-            <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=85&fit=crop&crop=faces,top" alt="Before microneedling" loading="lazy"/>
-              <span class="result-panel-label">Before</span>
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=85&fit=crop&crop=faces,top" alt="Microneedling result" loading="lazy"/>
+          <div class="result-badge-before">Client Result</div>
+          <div class="result-after-overlay">
+            <div class="result-after-label">After Treatment</div>
+            <div class="result-after-headline">Texture refined.<br>Pores visibly minimized.</div>
+            <div class="result-after-stats">
+              <div class="result-stat"><span class="result-stat-val">3</span><span class="result-stat-lbl">Sessions</span></div>
+              <div class="result-stat"><span class="result-stat-val">6wk</span><span class="result-stat-lbl">Protocol</span></div>
+              <div class="result-stat"><span class="result-stat-val">SkinPen</span><span class="result-stat-lbl">Device</span></div>
             </div>
-            <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=85&fit=crop&crop=faces,top" alt="After microneedling" loading="lazy"/>
-              <span class="result-panel-label">After</span>
-            </div>
+            <div class="result-progress"><div class="result-progress-track"><div class="result-progress-fill" style="width:89%"></div></div><div class="result-progress-label">Texture improvement · 89%</div></div>
           </div>
-          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
-          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
         </div>
         <div class="result-info">
           <div class="result-treatment">Microneedling Series</div>
@@ -994,18 +1003,18 @@
       <!-- CARD 5 — PRP -->
       <div class="result-card reveal from-bottom reveal-delay-1" data-index="4" onclick="openLightbox(4)">
         <div class="result-visual">
-          <div class="result-ba-wrap">
-            <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=400&q=85&fit=crop&crop=faces,top" alt="Before PRP" loading="lazy"/>
-              <span class="result-panel-label">Before</span>
+          <img src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=500&q=85&fit=crop&crop=faces,top" alt="PRP result" loading="lazy"/>
+          <div class="result-badge-before">Client Result</div>
+          <div class="result-after-overlay">
+            <div class="result-after-label">After Treatment</div>
+            <div class="result-after-headline">Luminous glow restored.<br>Collagen visibly improved.</div>
+            <div class="result-after-stats">
+              <div class="result-stat"><span class="result-stat-val">4</span><span class="result-stat-lbl">Sessions</span></div>
+              <div class="result-stat"><span class="result-stat-val">PRP</span><span class="result-stat-lbl">Protocol</span></div>
+              <div class="result-stat"><span class="result-stat-val">90d</span><span class="result-stat-lbl">Timeline</span></div>
             </div>
-            <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=400&q=85&fit=crop&crop=faces,top" alt="After PRP" loading="lazy"/>
-              <span class="result-panel-label">After</span>
-            </div>
+            <div class="result-progress"><div class="result-progress-track"><div class="result-progress-fill" style="width:88%"></div></div><div class="result-progress-label">Radiance improvement · 88%</div></div>
           </div>
-          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
-          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
         </div>
         <div class="result-info">
           <div class="result-treatment">PRP Skin Revival</div>
@@ -1016,18 +1025,18 @@
       <!-- CARD 6 — Chemical Peel -->
       <div class="result-card reveal from-bottom reveal-delay-2" data-index="5" onclick="openLightbox(5)">
         <div class="result-visual">
-          <div class="result-ba-wrap">
-            <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=400&q=85&fit=crop&crop=faces,top" alt="Before chemical peel" loading="lazy"/>
-              <span class="result-panel-label">Before</span>
+          <img src="https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=500&q=85&fit=crop&crop=faces,top" alt="Chemical peel result" loading="lazy"/>
+          <div class="result-badge-before">Client Result</div>
+          <div class="result-after-overlay">
+            <div class="result-after-label">After Treatment</div>
+            <div class="result-after-headline">Hyperpigmentation cleared.<br>Even tone achieved.</div>
+            <div class="result-after-stats">
+              <div class="result-stat"><span class="result-stat-val">2</span><span class="result-stat-lbl">Sessions</span></div>
+              <div class="result-stat"><span class="result-stat-val">VI</span><span class="result-stat-lbl">Peel type</span></div>
+              <div class="result-stat"><span class="result-stat-val">91%</span><span class="result-stat-lbl">Pigment clear</span></div>
             </div>
-            <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=400&q=85&fit=crop&crop=faces,top" alt="After chemical peel" loading="lazy"/>
-              <span class="result-panel-label">After</span>
-            </div>
+            <div class="result-progress"><div class="result-progress-track"><div class="result-progress-fill" style="width:91%"></div></div><div class="result-progress-label">Pigmentation reduction · 91%</div></div>
           </div>
-          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
-          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
         </div>
         <div class="result-info">
           <div class="result-treatment">Chemical Peel</div>
@@ -1035,21 +1044,21 @@
         </div>
       </div>
 
-      <!-- CARD 7 — Full Face Rejuvenation -->
+      <!-- CARD 7 — Full Face -->
       <div class="result-card reveal from-bottom" data-index="6" onclick="openLightbox(6)">
         <div class="result-visual">
-          <div class="result-ba-wrap">
-            <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&q=85&fit=crop&crop=faces,top" alt="Before full face" loading="lazy"/>
-              <span class="result-panel-label">Before</span>
+          <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=500&q=85&fit=crop&crop=faces,top" alt="Full face rejuvenation result" loading="lazy"/>
+          <div class="result-badge-before">Client Result</div>
+          <div class="result-after-overlay">
+            <div class="result-after-label">After Treatment</div>
+            <div class="result-after-headline">Full face refresh.<br>No surgery. No downtime.</div>
+            <div class="result-after-stats">
+              <div class="result-stat"><span class="result-stat-val">3</span><span class="result-stat-lbl">Treatments</span></div>
+              <div class="result-stat"><span class="result-stat-val">8wk</span><span class="result-stat-lbl">Protocol</span></div>
+              <div class="result-stat"><span class="result-stat-val">0d</span><span class="result-stat-lbl">Downtime</span></div>
             </div>
-            <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&q=85&fit=crop&crop=faces,top" alt="After full face" loading="lazy"/>
-              <span class="result-panel-label">After</span>
-            </div>
+            <div class="result-progress"><div class="result-progress-track"><div class="result-progress-fill" style="width:96%"></div></div><div class="result-progress-label">Overall satisfaction · 96/100</div></div>
           </div>
-          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
-          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
         </div>
         <div class="result-info">
           <div class="result-treatment">Full Face Rejuvenation</div>
@@ -1060,18 +1069,18 @@
       <!-- CARD 8 — Skin Texture -->
       <div class="result-card reveal from-bottom reveal-delay-1" data-index="7" onclick="openLightbox(7)">
         <div class="result-visual">
-          <div class="result-ba-wrap">
-            <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400&q=85&fit=crop&crop=faces,top" alt="Before skin texture" loading="lazy"/>
-              <span class="result-panel-label">Before</span>
+          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=500&q=85&fit=crop&crop=faces,top" alt="Skin texture result" loading="lazy"/>
+          <div class="result-badge-before">Client Result</div>
+          <div class="result-after-overlay">
+            <div class="result-after-label">After Treatment</div>
+            <div class="result-after-headline">Glass skin achieved.<br>Acne scars significantly reduced.</div>
+            <div class="result-after-stats">
+              <div class="result-stat"><span class="result-stat-val">4</span><span class="result-stat-lbl">Sessions</span></div>
+              <div class="result-stat"><span class="result-stat-val">87%</span><span class="result-stat-lbl">Scar fade</span></div>
+              <div class="result-stat"><span class="result-stat-val">3mo</span><span class="result-stat-lbl">Timeline</span></div>
             </div>
-            <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400&q=85&fit=crop&crop=faces,top" alt="After skin texture" loading="lazy"/>
-              <span class="result-panel-label">After</span>
-            </div>
+            <div class="result-progress"><div class="result-progress-track"><div class="result-progress-fill" style="width:87%"></div></div><div class="result-progress-label">Texture improvement · 87%</div></div>
           </div>
-          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
-          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
         </div>
         <div class="result-info">
           <div class="result-treatment">Skin Texture & Tone</div>
@@ -1082,18 +1091,18 @@
       <!-- CARD 9 — Under-Eye -->
       <div class="result-card reveal from-bottom reveal-delay-2" data-index="8" onclick="openLightbox(8)">
         <div class="result-visual">
-          <div class="result-ba-wrap">
-            <div class="result-panel before">
-              <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=85&fit=crop&crop=faces,top" alt="Before under-eye" loading="lazy"/>
-              <span class="result-panel-label">Before</span>
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=85&fit=crop&crop=faces,top" alt="Under-eye filler result" loading="lazy"/>
+          <div class="result-badge-before">Client Result</div>
+          <div class="result-after-overlay">
+            <div class="result-after-label">After Treatment</div>
+            <div class="result-after-headline">Dark circles gone.<br>Rested, awake, refreshed.</div>
+            <div class="result-after-stats">
+              <div class="result-stat"><span class="result-stat-val">0.8ml</span><span class="result-stat-lbl">Restylane</span></div>
+              <div class="result-stat"><span class="result-stat-val">12mo</span><span class="result-stat-lbl">Duration</span></div>
+              <div class="result-stat"><span class="result-stat-val">1</span><span class="result-stat-lbl">Visit</span></div>
             </div>
-            <div class="result-panel after">
-              <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=85&fit=crop&crop=faces,top" alt="After under-eye" loading="lazy"/>
-              <span class="result-panel-label">After</span>
-            </div>
+            <div class="result-progress"><div class="result-progress-track"><div class="result-progress-fill" style="width:95%"></div></div><div class="result-progress-label">Client satisfaction · 95/100</div></div>
           </div>
-          <div class="result-divider"><div class="result-divider-pill">before · after</div></div>
-          <div class="result-view-overlay"><div class="result-view-btn">View Result</div></div>
         </div>
         <div class="result-info">
           <div class="result-treatment">Under-Eye Restoration</div>
@@ -1102,6 +1111,12 @@
       </div>
 
     </div><!-- /results-grid -->
+
+    <!-- More results footnote -->
+    <div class="results-footnote reveal from-bottom">
+      <p>More client results available upon request. All treatments performed by licensed providers. Individual results may vary.</p>
+      <a href="#contact" class="btn-text" style="color:var(--bark-mid);">Request a Consult <span class="btn-text-arrow"></span></a>
+    </div>
   </div>
 </section>
 
@@ -1118,15 +1133,10 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <div class="lb-visual" id="lbVisual">
-      <div class="lb-panel before" id="lbBefore">
-        <img id="lbBeforeImg" src="" alt="Before"/>
-        <span class="lb-panel-label">Before</span>
-      </div>
-      <div class="lb-divider"></div>
-      <div class="lb-panel after" id="lbAfter">
-        <img id="lbAfterImg" src="" alt="After"/>
-        <span class="lb-panel-label">After</span>
-      </div>
+      <img id="lbImg" src="" alt="Client result" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:saturate(0.9) brightness(0.95);"/>
+      <div class="lb-visual-overlay"></div>
+      <div class="lb-visual-badge">Client Result</div>
+      <div class="lb-visual-stats" id="lbStats"></div>
     </div>
     <div class="lb-info">
       <div>
@@ -1709,87 +1719,98 @@ document.querySelectorAll('.service-card').forEach(card => {
   goTo(0);
 })();
 
-// ── Before/After Lightbox ──
+// ── Results Lightbox ──
 (function() {
   const RESULTS = [
     {
       img:       'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Botox — Forehead & 11s',
       meta:      'Dysport · 42 units · Natural brow lift, full relaxation of glabellar lines',
-      sessions:  '1 Visit'
+      sessions:  '1 Visit',
+      stats:     [['94%','Line reduction'],['42u','Dysport units'],['1','Visit']]
     },
     {
       img:       'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Lip Enhancement',
       meta:      'Juvederm Ultra Plus · 1ml · Definition, symmetry, subtle volume',
-      sessions:  '1 Visit'
+      sessions:  '1 Visit',
+      stats:     [['1ml','Juvederm'],['2wk','Final result'],['1','Visit']]
     },
     {
       img:       'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Cheek Contouring',
       meta:      'Voluma · 2ml bilateral · Lifted midface, refined cheekbone definition',
-      sessions:  '1 Visit'
+      sessions:  '1 Visit',
+      stats:     [['2ml','Voluma'],['18mo','Duration'],['1','Visit']]
     },
     {
       img:       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Microneedling Series',
       meta:      'SkinPen · Series of 3 · Pore refinement, texture improvement, lasting radiance',
-      sessions:  '3 Visits'
+      sessions:  '3 Visits',
+      stats:     [['3','Sessions'],['89%','Texture improve'],['6wk','Protocol']]
     },
     {
       img:       'https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'PRP Skin Revival',
       meta:      'Platelet-Rich Plasma · 4 sessions · Collagen induction, glow restoration',
-      sessions:  '4 Visits'
+      sessions:  '4 Visits',
+      stats:     [['4','Sessions'],['88%','Radiance gain'],['90d','Timeline']]
     },
     {
       img:       'https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Chemical Peel',
       meta:      'VI Peel Precision Plus · Hyperpigmentation, fine lines, evenness',
-      sessions:  '2 Visits'
+      sessions:  '2 Visits',
+      stats:     [['91%','Pigment clear'],['VI','Peel type'],['2','Sessions']]
     },
     {
       img:       'https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Full Face Rejuvenation',
       meta:      'Botox + Filler + Microneedling · Comprehensive age reversal protocol',
-      sessions:  '3 Visits'
+      sessions:  '3 Visits',
+      stats:     [['3','Treatments'],['0d','Downtime'],['96%','Satisfaction']]
     },
     {
       img:       'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Skin Texture & Tone',
       meta:      'Microneedling + PRP + VI Peel · Multi-modality skin transformation',
-      sessions:  '4 Visits'
+      sessions:  '4 Visits',
+      stats:     [['4','Sessions'],['87%','Scar fade'],['3mo','Timeline']]
     },
     {
       img:       'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&q=90&fit=crop&crop=faces,top',
       treatment: 'Under-Eye Restoration',
       meta:      'Restylane · Tear Trough · Hollow correction, dark shadow elimination',
-      sessions:  '1 Visit'
+      sessions:  '1 Visit',
+      stats:     [['0.8ml','Restylane'],['12mo','Duration'],['95%','Satisfaction']]
     }
   ];
 
-  const overlay    = document.getElementById('lb-overlay');
-  const prevBtn    = document.getElementById('lbPrev');
-  const nextBtn    = document.getElementById('lbNext');
-  const closeBtn   = document.getElementById('lbClose');
-  const beforeImg  = document.getElementById('lbBeforeImg');
-  const afterImg   = document.getElementById('lbAfterImg');
-  const treatment  = document.getElementById('lbTreatment');
-  const meta       = document.getElementById('lbMeta');
-  const sessions   = document.getElementById('lbSessions');
-  const counter    = document.getElementById('lbCounter');
-  let current      = 0;
+  const overlay   = document.getElementById('lb-overlay');
+  const prevBtn   = document.getElementById('lbPrev');
+  const nextBtn   = document.getElementById('lbNext');
+  const closeBtn  = document.getElementById('lbClose');
+  const lbImg     = document.getElementById('lbImg');
+  const lbStats   = document.getElementById('lbStats');
+  const treatment = document.getElementById('lbTreatment');
+  const meta      = document.getElementById('lbMeta');
+  const sessions  = document.getElementById('lbSessions');
+  const counter   = document.getElementById('lbCounter');
+  let current     = 0;
 
   function populate(idx) {
     const r = RESULTS[idx];
-    beforeImg.src    = r.img;
-    afterImg.src     = r.img;
+    lbImg.src = r.img;
     treatment.textContent = r.treatment;
     meta.textContent      = r.meta;
     sessions.textContent  = r.sessions;
     counter.textContent   = `${idx + 1} of ${RESULTS.length}`;
-    prevBtn.style.opacity = idx === 0                    ? '0.3' : '1';
-    nextBtn.style.opacity = idx === RESULTS.length - 1  ? '0.3' : '1';
+    lbStats.innerHTML = r.stats.map(([val,lbl]) =>
+      `<div class="lb-stat-block"><div class="lb-stat-val">${val}</div><div class="lb-stat-lbl">${lbl}</div></div>`
+    ).join('');
+    prevBtn.style.opacity = idx === 0                   ? '0.3' : '1';
+    nextBtn.style.opacity = idx === RESULTS.length - 1 ? '0.3' : '1';
     prevBtn.disabled      = idx === 0;
     nextBtn.disabled      = idx === RESULTS.length - 1;
   }
